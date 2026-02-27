@@ -17,7 +17,7 @@ La solucion a todo esto es PerShia, por medio de imagenes que el usuario suba a 
 
 ## Tecnologías
 
-## Colaboradores
+## Desarrolladores
 
 <p align="center">Iosset Ivan Sandoval Gonzalez
 
