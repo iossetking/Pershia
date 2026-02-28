@@ -16,7 +16,7 @@ La solucion a todo esto es PerShia, por medio de imagenes que el usuario suba a 
 ## Uso
  Nuestra plataforma de moda impulsada por IA permite a los usuarios digitalizar su armario y participar en una comunidad.
 
- Su uso esta segmnetado es estas partes :
+ Su uso esta segmnetado en estas partes :
 
  **1.Digitalización de Prendas (AI Analysis)**
 
