@@ -14,6 +14,36 @@ La solucion a todo esto es PerShia, por medio de imagenes que el usuario suba a 
 ## Instalar
 
 ## Uso
+ Nuestra plataforma de moda impulsada por IA permite a los usuarios digitalizar su armario y participar en una comunidad.
+
+ Su uso esta segmnetado es estas partes :
+
+ **1.Digitalización de Prendas (AI Analysis)**
+
+Cuando un Usuario sube una imagen de una prenda, el Wardrobe System actúa como orquestador: Envía la imagen a Llama 4 Scout vía [HTTPS/REST] para obtener metadatos (color, material, tipo de prenda) y contexto de estilo.
+Esto en conjunto, persiste el archivo original en AWS S3 utilizando el SDK de AWS.
+
+**2.Gestión del Guardarropa y Estilo**
+
+El usuario interactúa con su inventario para construir combinaciones. El sistema utiliza el contexto generado por la IA para sugerir qué prendas combinan mejor entre sí, basándose en la base de conocimientos del LLM.
+
+**3.Social Feed**
+
+Una vez creado un outfit, el usuario puede publicarlo en el Social Feed:
+
+-El feed funciona de manera asíncrona, consumiendo las imágenes directamente desde CloudFront para optimizar la latencia.
+
+-Interacción: Los usuarios realizan "swipes" (likes/dislikes), lo que alimenta el sistema de recomendaciones personalizadas para mostrar contenido más relevante en el futuro.
+
+**Protocolos y Tecnologías**
+
+-Comunicación: RESTful APIs sobre HTTPS.
+
+-IA: Procesamiento de lenguaje natural y visión por computadora mediante Llama 4.
+
+-Almacenamiento: Cloud-native con AWS S3.
+
+-Entrega: Edge computing mediante CDN (CloudFront) para la visualización fluida del feed
 
 ## Tecnologías
 
