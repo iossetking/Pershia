@@ -68,18 +68,18 @@ El proyecto se basa en una arquitectura de microservicios y agentes de IA, dise�
 
 ## Desarrolladores
 
-<p align="center">Iosset Ivan Sandoval Gonzalez
+<p align="center">Iosset Ivan Sandoval Gonzalez (Project Manager)
 
-<p align="center">Yohance Garrett Lopez 
+<p align="center">Yohance Garrett Lopez (Pizzas y chescos)
 
-<p align="center">Oscar Josue Lopez Gonzalez
+<p align="center">Oscar Josue Lopez Gonzalez(Frontend)
 
-<p align="center">Miguel Omar Flores García
+<p align="center">Miguel Omar Flores García(DevOps)
 
-<p align="center">Rodrigo Alonso Castillo Ramirez 
+<p align="center">Rodrigo Alonso Castillo Ramirez (Frontend)
 
-<p align="center">Adin Jared Rosas Silva
+<p align="center">Adin Jared Rosas Silva(DataBase)
 
-<p align="center">Sebastian Sanchez Espinosa
+<p align="center">Sebastian Sanchez Espinosa(Backend)
 
 ## Licencia y Autor
