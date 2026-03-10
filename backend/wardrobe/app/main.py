@@ -1,4 +1,4 @@
-# Este archivo hace una sola cosa: ensamblar la aplicación.
+# Este archivo ensambla la aplicación.
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware

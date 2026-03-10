@@ -7,8 +7,7 @@ class Settings(BaseSettings):
     Clase que representa toda la configuración de la app.
 
     pydantic-settings lee automáticamente las variables de entorno
-    y las mapea a los atributos de esta clase. Si una variable
-    requerida falta, lanza un error ANTES de que la app arranque.
+    y las mapea a los atributos de esta clase.
 
     El orden de prioridad para leer valores es:
     1. Variables de entorno del sistema
