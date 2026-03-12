@@ -9,40 +9,34 @@ CREATE TABLE users (
 
 );
 
-INSERT INTO users;
-    ( username, email)
-VALUES
-    ('Miguel_Garcia', 'miguel@realm.io', ),
-    ('Sebastian_Sanchez', 'sebas@realm.io');
-
 DROP TABLE IF EXISTS images CASCADE;
 CREATE TABLE images(
-    id_images UUID PRIMARY KEY gen_random_uuid(),
+    id_images UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     user_id UUID REFERENCES users(user_id) ON DELETE CASCADE,
     s3_url VARCHAR(1024) NOT NULL,
     s3_key VARCHAR(512) NOT NULL,
     formats VARCHAR(20),
-    image_date TIMESTAMPTZ,
+    image_date TIMESTAMPTZ
 );
 
-DROP TABLE IF EXISTS embbeding_images CASCADE
-CREATE TABLE embbeding_images (
-    id_embb UUID PRIMARY KEY get_random_uuid(),
+DROP TABLE IF EXISTS embedding_images CASCADE;
+CREATE TABLE embedding_images (
+    id_embb UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     id_images UUID REFERENCES images(id_images) ON DELETE CASCADE,
     vector_char VECTOR(512) NOT NULL,
-    start_date TIMESTAMPTZ, 
+    start_date TIMESTAMPTZ 
 );
 
-CREATE INDEX idx_embbedings_hnsw ON embbedings_images
-USING hnsw (vector_char vector-cousine_ops);
+CREATE INDEX idx_embbedings_hnsw ON embedding_images
+USING hnsw (vector_char vector_cosine_ops);
 
 DROP TABLE IF EXISTS analysis_ia;
 CREATE TABLE analysis_ia (
-    analysis_id UUID PRIMARY KEY gen_random_uuid(),
+    analysis_id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     id_images UUID REFERENCES images(id_images) ON DELETE CASCADE,
     text_extract TEXT,
     tags JSONB,
     descriptions TEXT,
-    analysis_date TIMESTAMPTZ,
+    analysis_date TIMESTAMPTZ
 );
 
