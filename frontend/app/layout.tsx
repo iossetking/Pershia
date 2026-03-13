@@ -15,9 +15,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="antialiased">
+      <body className="antialiased h-screen flex flex-col">
         <TopNav />
-        {children}
+        
+        <main className="flex-1 flex flex-col overflow-y-auto">
+          {children}
+        </main>
       </body>
     </html>
   );
