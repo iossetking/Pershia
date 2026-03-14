@@ -29,7 +29,7 @@ export default function BottomNav () {
                 isCurrent
                   ? 'bg-[#AAA38E] text-[#2F2020] ' // Color si está seleccionado
                   : 'bg-[#D4CAAF] text-[#2F2020] hover:bg-white/20', // Color normal
-                'rounded-3xl px-3 py-2 text-sm font-medium transition-colors'
+                'rounded-3xl px-3 py-2 text-center w-26 font-medium transition-colors'
               )}
             >
               {item.name}
