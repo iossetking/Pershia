@@ -1,8 +1,15 @@
-export default function Outfits() {
+"use client"
+import { useState } from 'react'
+
+import CosItems from "./ConItem"
+
+export default function Items() {
+  const [activecategory, setactivecategory] = useState('All');
   return (
-    <div>
-      <h1 className="text-black text-xl font-bold">Zona de conjuntos</h1>
-      <p className="text-gray-600">Aquí van mis conjuntos...</p>
+  <div className="p-2">    
+      
+      <CosItems/>
+      
     </div>
   )
 }

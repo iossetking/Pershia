@@ -21,15 +21,17 @@ export default function TopNav() {
         <div className="relative flex h-16 items-center justify-between">
             <div className="flex flex-1 items-center justify-start">
               <div className="flex flex-1 items-center justify-start">
-  <p className="text-2xl font-extralight tracking-[0.2em] uppercase bg-gradient-to-r from-gray-900 to-gray-500 bg-clip-text text-transparent">
-    Pershia
+  <p className="text-lg font-semibold md:text-2xl md:font-extralight md:tracking-[0.2em] md:uppercase md:bg-gradient-to-r md:from-gray-900 md:to-gray-500 md:bg-clip-text md:text-transparent">
+  Pershia
   </p>
 </div>
             </div>
             <div className="flex items-center justify-center">
               <div className="flex space-x-1 sm:space-x-4">
                 {navigation.map((item) => {
-                  const isCurrent = pathname === item.href;
+                  const isCurrent = pathname.startsWith('/wardrobe') && item.name === 'Wardrobe'
+                    ? true
+                    : pathname === item.href;
                   return (
                     <Link
                       key={item.name}

@@ -51,17 +51,9 @@ export const Items = [
     imageUrl: 'https://i.pinimg.com/1200x/1c/d9/76/1cd976ba5009a9d5415cecba82362408.jpg',       
   }
 ]
-//Resive los datos
-interface CosItemsProps {
-  activecategory: string;
-}
 
-export default function CosItems({ activecategory }: CosItemsProps) {
-  // Filtramos los items según la categoría
-  const itemsFils = activecategory === 'All' 
-    ? Items 
-    : Items.filter(item => item.category === activecategory);
 
+export default function CosItems() {
   return (
     <div className="mt-6">
       
@@ -70,7 +62,7 @@ export default function CosItems({ activecategory }: CosItemsProps) {
       */}
       <div className="columns-[150px] md:columns-[250px] gap-4">
         
-        {itemsFils.map((item) => (
+        {Items.map((item) => (
           <div 
             key={item.id} 
             className="break-inside-avoid mb-4 rounded-2xl overflow-hidden cursor-pointer group"

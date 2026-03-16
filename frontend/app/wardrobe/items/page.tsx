@@ -7,7 +7,7 @@ export default function Items() {
   const [activecategory, setactivecategory] = useState('All');
   return (
     
-<div className="p-2">    
+    <div className="p-2">    
       <CategoriesMenu 
         activecategory={activecategory}
         setactivecategory={setactivecategory}
