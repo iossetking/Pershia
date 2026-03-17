@@ -1,0 +1,27 @@
+# docker-compose.yml
+services:
+
+  # ── Base de Datos ──────────────────────
+  db:
+    image: pgvector/pgvector:pg16
+    container_name: queryforge_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: mi_nueva_db
+      POSTGRES_USER: usuario_admin
+      POSTGRES_PASSWORD: password_seguro
+    ports:
+      - "5432:5432"
+    volumes:
+      # El volumen persistente 
+      - pgdata:/var/lib/postgresql/data
+      - ./database/db_data.sql:/docker-entrypoint-initdb.d/db_data.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U usuario_admin -d mi_nueva_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+
+volumes:
+  pgdata:
