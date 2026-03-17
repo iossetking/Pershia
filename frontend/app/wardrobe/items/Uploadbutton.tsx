@@ -1,11 +1,12 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { PlusIcon, CameraIcon, PhotoIcon } from '@heroicons/react/24/outline';
 import PreviewModal from './PreviwModal';
+import removeBackground from '@/lib/remove-bg';
 
 export default function UploadButton() {
   const galleryInputRef = useRef<HTMLInputElement>(null);
   const cameraInputRef = useRef<HTMLInputElement>(null);
-  
+
   const [isOpen, setIsOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
@@ -13,7 +14,7 @@ export default function UploadButton() {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  
+
   // Estado para saber si Python esta procesando la imagen
   const [isProcessing, setIsProcessing] = useState(false);
 
@@ -37,43 +38,37 @@ export default function UploadButton() {
   // Conexión a python y manejo de archivos
   const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;
-    
+
     if (files && files.length > 0) {
       const originalFile = files[0];
-      
+
       // pantalla de procesando
       setIsProcessing(true);
 
       try {
-        {/*
-          
-          
-          AQUÍ VA El CODIGO PARA ENVIAR A PYTHON Y RECIBIR LA IMAGEN PROCESADA
-          
-          
-          */}
+        console.log(typeof originalFile);
+        console.log(originalFile);
 
-        // Simulacion(Borrar cundo este lo de python)
-        await new Promise(resolve => setTimeout(resolve, 2000));
-        
-        // Usaremos la imagen original como prueba.
-        // Cuando este lo de python, aquí ira la imagen sin fondo.
-        const imageUrlForPreview = URL.createObjectURL(originalFile);
-        
-        // 3. Guardamos la imagen ( y abrimos el Modal
-        setSelectedFile(originalFile); // En el futuro será el 'processedFile'
+        const processedFile = await removeBackground(originalFile);
+        console.log("Fondo eliminado:", processedFile);
+
+        // Usaremos la imagen procesada para la previsualización
+        const imageUrlForPreview = URL.createObjectURL(processedFile);
+
+        // 3. Guardamos la imagen y abrimos el Modal
+        setSelectedFile(processedFile);
         setPreviewUrl(imageUrlForPreview);
         setIsModalOpen(true);
 
       } catch (error) {
-        console.error("Error al quitar el fondo:", error);
-        alert("Hubo un error al procesar la imagen.");
+        console.error("Error removing background:", error);
+        alert("Error while processing image.");
       } finally {
         // Apagamos la pantalla de carga, ya sea que haya funcionado o fallado
         setIsProcessing(false);
       }
     }
-    
+
     event.target.value = ''; // Limpiamos el input
   };
 
@@ -96,12 +91,12 @@ export default function UploadButton() {
       {isProcessing && (
         <div className="fixed inset-0 z-[110] flex flex-col items-center justify-center bg-black/60 backdrop-blur-sm">
           <div className="w-12 h-12 border-4 border-white/30 border-t-[#af925c] rounded-full animate-spin mb-4"></div>
-          <p className="text-white font-medium text-lg">Quitando el fondo...</p>
+          <p className="text-white font-medium text-lg">Removing background...</p>
         </div>
       )}
 
       {/* Modal de previsualización */}
-      <PreviewModal 
+      <PreviewModal
         isOpen={isModalOpen}
         previewUrl={previewUrl}
         file={selectedFile}
