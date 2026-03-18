@@ -1,15 +1,13 @@
-"use client"
-import { useState } from 'react'
 
-import CosItems from "./ConItem"
-
-export default function Items() {
-  const [activecategory, setactivecategory] = useState('All');
+import React from 'react';
+import ConOutfit from './ConOutfits';
+export default function OutfitsPage() {
   return (
-  <div className="p-2">    
+    <div className="p-4">
       
-      <CosItems/>
+      {/* ¡Mira qué limpio queda esto! */}
+      <ConOutfit />
       
     </div>
-  )
+  );
 }
