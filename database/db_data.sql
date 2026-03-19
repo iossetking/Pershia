@@ -15,7 +15,7 @@ END;
 $$ language 'plpgsql';
 
 -- ==============================================================================
--- MÓDULO 1 Y 2: USUARIOS Y CATÁLOGO (Igual que antes, optimizado para S3)
+-- MÓDULO 1 Y 2: USUARIOS Y CATÁLOGO 
 -- ==============================================================================
 CREATE TABLE users (
     user_id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -53,7 +53,7 @@ CREATE TABLE garment_analysis (
 CREATE INDEX idx_garment_analysis_tags ON garment_analysis USING GIN (ai_tags);
 
 -- ==============================================================================
--- MÓDULO 3: EL MOTOR TINDER (Recomendaciones)
+-- MÓDULO 3: EL MOTOR
 -- ==============================================================================
 CREATE TABLE user_swipes (
     swipe_id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -66,7 +66,7 @@ CREATE TABLE user_swipes (
 CREATE INDEX idx_swipes_user ON user_swipes(user_id, action);
 
 -- ==============================================================================
--- MÓDULO 4: LA MEMORIA DE LANGGRAPH (El cambio crítico)
+-- MÓDULO 4: LA MEMORIA DE LANGGRAPH
 -- ==============================================================================
 
 -- 1. Tabla para vincular a tu usuario con el Agente de LangGraph
