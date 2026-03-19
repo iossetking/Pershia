@@ -78,7 +78,43 @@ export const OutfitsData: OutfitType[] = [ //
       { itemId: 9, top: 50, left: 10, scale: 80, zIndex: 1 }, 
       { itemId: 6, top: -5, left: 60, scale: 30, zIndex: 3 }, 
     ]
-  }
+  },
+  {
+    id: 'outfit-6',
+    name: 'Con Accesorios',
+    elements: [
+      { itemId: 4, top: 5, left: 5, scale: 90, zIndex: 2 },   
+      { itemId: 9, top: 50, left: 10, scale: 80, zIndex: 1 }, 
+      { itemId: 6, top: -5, left: 60, scale: 30, zIndex: 3 }, 
+    ]
+  },
+  {
+    id: 'outfit-7',
+    name: 'Con Accesorios',
+    elements: [
+      { itemId: 4, top: 5, left: 5, scale: 90, zIndex: 2 },   
+      { itemId: 9, top: 50, left: 10, scale: 80, zIndex: 1 }, 
+      { itemId: 6, top: -5, left: 60, scale: 30, zIndex: 3 }, 
+    ]
+  },
+  {
+    id: 'outfit-8',
+    name: 'Con Accesorios',
+    elements: [
+      { itemId: 4, top: 5, left: 5, scale: 90, zIndex: 2 },   
+      { itemId: 9, top: 50, left: 10, scale: 80, zIndex: 1 }, 
+      { itemId: 6, top: -5, left: 60, scale: 30, zIndex: 3 }, 
+    ]
+  },
+  {
+    id: 'outfit-9',
+    name: 'Con Accesorios',
+    elements: [
+      { itemId: 4, top: 5, left: 5, scale: 90, zIndex: 2 },   
+      { itemId: 9, top: 50, left: 10, scale: 80, zIndex: 1 }, 
+      { itemId: 6, top: -5, left: 60, scale: 30, zIndex: 3 }, 
+    ]
+  },
 
 ];
 
@@ -86,13 +122,19 @@ export const OutfitsData: OutfitType[] = [ //
 export default function ConOutfit() {
   return (
     <div className="mt-6">
+      
+      {/* Usamos exactamente las mismas columnas y gap que en tu componente CosItems */}
       <div className="columns-[150px] md:columns-[250px] gap-4">
         
         {OutfitsData.map((outfit) => (
           <div 
             key={outfit.id} 
-            className="break-inside-avoid mb-4 rounded-2xl overflow-hidden cursor-pointer group bg-white shadow-sm hover:shadow-md transition-all duration-300"
+            /* LA CLAVE AQUÍ ES: w-full e inline-block 
+              Esto hace que se comporte exactamente igual que la etiqueta <img> de tu otro código
+            */
+            className="w-full inline-block break-inside-avoid mb-4 rounded-2xl overflow-hidden cursor-pointer group bg-white shadow-sm hover:shadow-md transition-all duration-300"
           >
+            {/* Contenedor relativo que simula el espacio de la imagen */}
             <div className="relative w-full aspect-[3/4] bg-[#e6e2cd]/30">
               
               {outfit.elements.map((element, index) => {
@@ -105,6 +147,7 @@ export default function ConOutfit() {
                     key={index}
                     src={itemReal.imageUrl}
                     alt={`Item ${element.itemId}`}
+                    // Mantenemos la transición suave al pasar el mouse
                     className="absolute object-contain drop-shadow-sm transition-transform duration-300 md:group-hover:scale-110"
                     style={{
                       top: `${element.top}%`,
@@ -115,10 +158,6 @@ export default function ConOutfit() {
                   />
                 );
               })}
-            </div>
-            
-            <div className="p-3 text-center border-t border-[#e6e2cd]">
-              <span className="text-sm font-medium text-gray-800">{outfit.name}</span>
             </div>
           </div>
         ))}

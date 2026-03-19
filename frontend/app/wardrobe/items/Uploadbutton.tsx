@@ -79,7 +79,7 @@ export default function UploadButton() {
     setPreviewUrl(null);
   };
 
-  const handleConfirmUpload = (file: File) => {// Aquí es donde se guarda la imagen (actualmente solo mostramos un mensaje y cerramos el modal)
+  const handleConfirmUpload = (file: File) => {// Aquí es donde se guarda la imagen 
     console.log("Archivo SIN FONDO listo para guardarse definitivamente:", file);
     alert(`Imagen confirmada y lista para guardar.`);
     handleCloseModal();
@@ -105,7 +105,7 @@ export default function UploadButton() {
       />
 
       {/* Botón flotante */}
-      <div className="fixed bottom-15 right-6 z-50 flex flex-col items-end">
+      <div className="fixed bottom-20 right-6 z-50  flex flex-col items-end">
         {isOpen && (
           <div className="mb-4 flex flex-col gap-3">
             {isMobile && (

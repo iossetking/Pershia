@@ -16,7 +16,7 @@ export default function BottomNav () {
   // Esto detecta en qué URL estás a
   const pathname = usePathname()
   return (
-    <div className=" p-4 rounded-t-3xl w-full">
+    <div className="fixed bottom-0 left-0 w-full z-50 bg-[#E6E2CD] p-4 pb-[max(1rem,env(safe-area-inset-bottom))] rounded-t-3xl shadow-[0_-10px_15px_-3px_rgba(0,0,0,0.05)]">
       <div className="flex justify-around">
         {navigation.map((item) => {
           // Comprobamos si la ruta actual coincide con el href del botón
