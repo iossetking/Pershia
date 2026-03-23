@@ -1,34 +1,36 @@
-# database.py — Conexión async a PostgreSQL
+# database.py — Async connection to PostgreSQL
 
-# Este archivo gestiona la conexión a la base de datos y proveer sessions a quien las necesite.
+# This file manages the database connection and provides sessions to those who need them.
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession, async_sessionmaker
 from sqlalchemy.orm import DeclarativeBase
 
+from sqlmodel import SQLModel, select
+
 from app.core.config import settings
 
-# Engine gestionamos las conexiones de sqlalchemy
+# Engine manages the connections of sqlalchemy
 engine = create_async_engine(
-    settings.DATABASE_URL, # URL de la database
-    echo=settings.APP_ENV == 'development', # Imprimir cada query de SQL (solo en development)
-    pool_pre_ping = True,   # Verificar si la pool sigue activa
+    settings.DATABASE_URL, # URL of the database
+    echo=settings.APP_ENV == 'development', # Print each SQL query (only in development)
+    pool_pre_ping = True,   # Verify if the pool is still active
     )
 
 # SessionFactory 
 AsyncSessionLocal = async_sessionmaker(
-    bind = engine, # Cada session usa el engine
-    class_ = AsyncSession, # Las sessions seran async
-    expire_on_commit = False, # Para que no se borre memoria despues de commit
+    bind = engine, # Each session uses the engine
+    class_ = AsyncSession, # Sessions will be async
+    expire_on_commit = False, # So that memory is not deleted after commit
 )
 
 
-# Base para los modelos
-class Base(DeclarativeBase):
+# Base for the models
+class Base(SQLModel):
     pass
 
 # Dependency
-async def get_db():
+async def get_session():
     """
-    Dependency que provee una session de DB a cada endpoint.
+    Dependency which provides a DB session to each endpoint.
     """
     async with AsyncSessionLocal() as session:
         yield session

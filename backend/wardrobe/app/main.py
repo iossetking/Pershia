@@ -1,14 +1,20 @@
-# Este archivo ensambla la aplicación.
-
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-# Creacion de la app
+#
+# Routes
+#
+from app.routes import garment
+
 app = FastAPI(
     title='Pershia Wardrobe API',
-    description='Bankend del guardaropa',
+    description='Wardrobe API',
     version='0.1.0',
 )
+
+prefix_url = "/api"
+
+app.include_router(garment.router, prefix=prefix_url)
 
 # CORS para evitar request de otros sitios
 app.add_middleware(
