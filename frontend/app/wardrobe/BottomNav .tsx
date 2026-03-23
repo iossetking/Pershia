@@ -16,8 +16,8 @@ export default function BottomNav () {
   // Esto detecta en qué URL estás a
   const pathname = usePathname()
   return (
-    <div className="fixed bottom-0 left-0 w-full z-50 bg-[#E6E2CD] p-4 pb-[max(1rem,env(safe-area-inset-bottom))] rounded-t-3xl shadow-[0_-10px_15px_-3px_rgba(0,0,0,0.05)]">
-      <div className="flex justify-around">
+    <div className="p-4 rounded-t-3xl w-full flex justify-center">
+      <div className="flex justify-center gap-3">
         {navigation.map((item) => {
           // Comprobamos si la ruta actual coincide con el href del botón
           const isCurrent = pathname === item.href;
@@ -27,9 +27,9 @@ export default function BottomNav () {
               href={item.href}
               className={classNames(
                 isCurrent
-                  ? 'bg-[#AAA38E] text-[#2F2020] ' // Color si está seleccionado
+                  ? 'bg-[#AAA38E] text-[#2F2020]' // Color si está seleccionado
                   : 'bg-[#D4CAAF] text-[#2F2020] hover:bg-white/20', // Color normal
-                'rounded-3xl px-3 py-2 text-center w-26 font-medium transition-colors'
+                'rounded-3xl px-4 py-2 text-center font-medium transition-colors'
               )}
             >
               {item.name}
