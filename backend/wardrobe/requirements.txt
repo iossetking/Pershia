@@ -9,8 +9,14 @@ uvicorn[standard]==0.30.0
 # Bases de datos
 sqlalchemy==2.0.36
 
+sqlmodel
+
+psycopg2-binary
+
+motor
+
 # Driver async para PostgreSQL.
-asyncpg==0.29.0
+asyncpg==0.30.0
 
 # Soporte a tipo vector
 pgvector==0.3.5
@@ -47,7 +53,8 @@ httpx==0.27.0
 redis==5.0.8
 
 #  Marqo-FashionCLIP
-open-clip-torch==2.26.1
+# open-clip-torch==2.26.1
+marqo
 
 # LangGraph
 langgraph==0.2.28
