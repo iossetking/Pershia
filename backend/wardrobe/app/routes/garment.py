@@ -1,5 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException, status, Query
-from sqlmodel import AsyncSession, select
+from sqlmodel import select
+from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.models.garment import Garment, GarmentCreate, GarmentPublic
 from app.dependencies import get_db_session
@@ -9,7 +10,7 @@ router = APIRouter(
   tags=["Garments"]
 )
 
-@router.get("/", response_model=list[GarmentRead], status_code=status.HTTP_200_OK)
+@router.get("/", response_model=list[GarmentPublic], status_code=status.HTTP_200_OK)
 async def read_garments(
     session: AsyncSession = Depends(get_db_session),
     offset: int = Query(default=0, ge=0),
