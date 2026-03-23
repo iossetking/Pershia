@@ -1,0 +1,21 @@
+# Environment variables
+.env
+
+# Virtual environments
+.venv
+
+# IDE files
+.idea/
+.vscode/
+
+# Dependencies
+node_modules
+
+# System files
+.DS_Store
+
+# Database
+*.sql
+*.sqlite3
+*.db
+*.sqlite

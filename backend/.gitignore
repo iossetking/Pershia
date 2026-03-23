@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# docker
+.env
+.env.example
+Dockerfile
+.dockerignore
+
+# alembic
+# alembic/
+# alembic/versions/
+# alembic/__pycache__/
+# alembic/versions/__pycache__/
+
+
+# Alembic autogenerate cache (if used)
+.cache
