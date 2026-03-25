@@ -1,8 +1,10 @@
-export default function Collections() {
+import React from 'react';
+import CollectionsList from './Collections';
+
+export default function CollectionsPage() {
   return (
-    <div>
-      <h1 className="text-black text-xl font-bold">Zona de colecciones</h1>
-      <p className="text-gray-600">Aquí van mis colecciones...</p>
+    <div className="bg-[#faf6e9]/50 p-4 md:p-6 w-full min-h-[calc(100dvh-80px)]">
+      <CollectionsList />
     </div>
-  )
+  );
 }
