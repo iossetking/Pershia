@@ -35,3 +35,5 @@ __pycache__/
 .dockerignore
 # Allow critical Dockerfile
 !**/Dockerfile
+
+CLAUDE.md
