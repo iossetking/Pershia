@@ -6,19 +6,15 @@ def utc_now():
     return datetime.now(timezone.utc)
 
 class UserBase(SQLModel):
-    # Foreign key
-    # user_id: int = Field(nullable=False, foreign_key="user.id")
+    #user_id: int = Field(default=None, primary_key=True)
     user_id: int = Field(nullable=False)
-    s3_url: str = Field(nullable=False)
-    s3_key: str = Field(nullable=False)
-    color: str = Field(nullable=False)
-    fabric: str = Field(nullable=False)
-    category: str = Field(nullable=False)
-    style: str = Field(nullable=False)
-    is_public: bool = Field(default=False)
-    is_owned: bool = Field(default=False)
-    created_at: datetime = Field(default_factory=utc_now)
-  
+    username: str = Field(nullable=False)
+    email: str = Field(nullable=False)
+    hashed_pw: str = Field(nullable=False)
+    preferences: str = Field(nullable=False)
+    #joined_at: datetime | None = Field(default=None, sa_column_kwargs={"server_default": text("CURRENT_TIMESTAMP")})
+    joined_at: datetime = Field(default_factory=utc_now)
+
 class User(UserBase, table=True):
     __tablename__ = "users"
     user_id: Optional[int] = Field(default=None, primary_key=True)
