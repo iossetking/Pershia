@@ -1,5 +1,6 @@
 import React from 'react';
 import { Items } from '../items/ConItem'; 
+import OutfitRenderer from './OutfitRenderer';
 
 export interface OutfitElement {
   itemId: number;
@@ -11,14 +12,12 @@ export interface OutfitElement {
 
 export interface OutfitType { 
   id: string;
-  name: string;
   elements: OutfitElement[];
 }
 
-export const OutfitsData: OutfitType[] = [ //
+export const OutfitsData: OutfitType[] = [ 
   {
     id: 'outfit-casual',
-    name: 'Look Casual',
     elements: [
       { itemId: 1, top: 0, left: 10, scale: 80, zIndex: 1 },  
       { itemId: 2, top: 40, left: 10, scale: 80, zIndex: 2 }, 
@@ -27,7 +26,6 @@ export const OutfitsData: OutfitType[] = [ //
   },
   {
     id: 'outfit-accesorios',
-    name: 'Con Accesorios',
     elements: [
       { itemId: 4, top: 5, left: 5, scale: 90, zIndex: 2 },   
       { itemId: 9, top: 50, left: 10, scale: 80, zIndex: 1 }, 
@@ -35,129 +33,42 @@ export const OutfitsData: OutfitType[] = [ //
     ]
   },
   {
-    id: 'outfit-1',
-    name: 'Con Accesorios',
+    id: 'outfit-elegante',
     elements: [
-      { itemId: 4, top: 5, left: 5, scale: 90, zIndex: 2 },   
-      { itemId: 9, top: 50, left: 10, scale: 80, zIndex: 1 }, 
-      { itemId: 6, top: -5, left: 60, scale: 30, zIndex: 3 }, 
-    ]
-  },
-    {
-    id: 'outfit-2',
-    name: 'Con Accesorios',
-    elements: [
-      { itemId: 4, top: 5, left: 5, scale: 90, zIndex: 2 },   
-      { itemId: 9, top: 50, left: 10, scale: 80, zIndex: 1 }, 
-      { itemId: 6, top: -5, left: 60, scale: 30, zIndex: 3 }, 
-    ]
-  },
-    {
-    id: 'outfit-3',
-    name: 'Con Accesorios',
-    elements: [
-      { itemId: 4, top: 5, left: 5, scale: 90, zIndex: 2 },   
-      { itemId: 9, top: 50, left: 10, scale: 80, zIndex: 1 }, 
-      { itemId: 6, top: -5, left: 60, scale: 30, zIndex: 3 }, 
-    ]
-  },
-    {
-    id: 'outfit-4',
-    name: 'Con Accesorios',
-    elements: [
-      { itemId: 4, top: 5, left: 5, scale: 90, zIndex: 2 },   
-      { itemId: 9, top: 50, left: 10, scale: 80, zIndex: 1 }, 
-      { itemId: 6, top: -5, left: 60, scale: 30, zIndex: 3 }, 
-    ]
-  },
-    {
-    id: 'outfit-5',
-    name: 'Con Accesorios',
-    elements: [
-      { itemId: 4, top: 5, left: 5, scale: 90, zIndex: 2 },   
-      { itemId: 9, top: 50, left: 10, scale: 80, zIndex: 1 }, 
-      { itemId: 6, top: -5, left: 60, scale: 30, zIndex: 3 }, 
+      { itemId: 7, top: 0, left: 15, scale: 85, zIndex: 1 },
+      { itemId: 8, top: 45, left: 15, scale: 85, zIndex: 2 },
+      { itemId: 10, top: 80, left: 55, scale: 35, zIndex: 3 },
     ]
   },
   {
-    id: 'outfit-6',
-    name: 'Con Accesorios',
+    id: 'outfit-elegante2',
     elements: [
-      { itemId: 4, top: 5, left: 5, scale: 90, zIndex: 2 },   
-      { itemId: 9, top: 50, left: 10, scale: 80, zIndex: 1 }, 
-      { itemId: 6, top: -5, left: 60, scale: 30, zIndex: 3 }, 
+      { itemId: 7, top: 0, left: 15, scale: 85, zIndex: 1 },
+      { itemId: 8, top: 45, left: 15, scale: 85, zIndex: 2 },
+      { itemId: 5, top: 80, left: 55, scale: 35, zIndex: 3 },
     ]
   },
   {
-    id: 'outfit-7',
-    name: 'Con Accesorios',
+    id: 'outfit-elegante3',
     elements: [
-      { itemId: 4, top: 5, left: 5, scale: 90, zIndex: 2 },   
-      { itemId: 9, top: 50, left: 10, scale: 80, zIndex: 1 }, 
-      { itemId: 6, top: -5, left: 60, scale: 30, zIndex: 3 }, 
+      { itemId: 7, top: 0, left: 15, scale: 85, zIndex: 1 },
+      { itemId: 3, top: 45, left: 15, scale: 85, zIndex: 2 },
+      { itemId: 10, top: 80, left: 55, scale: 35, zIndex: 3 },
     ]
   },
-  {
-    id: 'outfit-8',
-    name: 'Con Accesorios',
-    elements: [
-      { itemId: 4, top: 5, left: 5, scale: 90, zIndex: 2 },   
-      { itemId: 9, top: 50, left: 10, scale: 80, zIndex: 1 }, 
-      { itemId: 6, top: -5, left: 60, scale: 30, zIndex: 3 }, 
-    ]
-  },
-  {
-    id: 'outfit-9',
-    name: 'Con Accesorios',
-    elements: [
-      { itemId: 4, top: 5, left: 5, scale: 90, zIndex: 2 },   
-      { itemId: 9, top: 50, left: 10, scale: 80, zIndex: 1 }, 
-      { itemId: 6, top: -5, left: 60, scale: 30, zIndex: 3 }, 
-    ]
-  },
-
 ];
-
-// 3. EL COMPONENTE PRINCIPAL
 export default function ConOutfit() {
   return (
-    <div className="mt-6">
-      
-      {/* Usamos exactamente las mismas columnas y gap que en tu componente CosItems */}
-      <div className="columns-[150px] md:columns-[250px] gap-4">
+    <div className="mt-6 pb-28">
+      <div className="flex flex-wrap gap-4 justify-start">
         
         {OutfitsData.map((outfit) => (
           <div 
             key={outfit.id} 
-            /* LA CLAVE AQUÍ ES: w-full e inline-block 
-              Esto hace que se comporte exactamente igual que la etiqueta <img> de tu otro código
-            */
-            className="w-full inline-block break-inside-avoid mb-4 rounded-2xl overflow-hidden cursor-pointer group bg-white shadow-sm hover:shadow-md transition-all duration-300"
+            className="w-[160px] md:w-[250px] lg:w-[280px] shrink-0 rounded-2xl overflow-hidden cursor-pointer group bg-white shadow-sm hover:shadow-md transition-all duration-300 border border-gray-100 p-2"
           >
-            {/* Contenedor relativo que simula el espacio de la imagen */}
-            <div className="relative w-full aspect-[3/4] bg-[#e6e2cd]/30">
-              
-              {outfit.elements.map((element, index) => {
-                const itemReal = Items.find(item => item.id === element.itemId);
-                
-                if (!itemReal) return null;
-
-                return (
-                  <img
-                    key={index}
-                    src={itemReal.imageUrl}
-                    alt={`Item ${element.itemId}`}
-                    // Mantenemos la transición suave al pasar el mouse
-                    className="absolute object-contain drop-shadow-sm transition-transform duration-300 md:group-hover:scale-110"
-                    style={{
-                      top: `${element.top}%`,
-                      left: `${element.left}%`,
-                      width: `${element.scale}%`,
-                      zIndex: element.zIndex
-                    }}
-                  />
-                );
-              })}
+            <div className="relative w-full aspect-[3/4] bg-[#faf6e9]/40 rounded-xl overflow-hidden group-hover:bg-[#faf6e9]/70 transition-colors">
+              <OutfitRenderer outfit={outfit} />
             </div>
           </div>
         ))}
