@@ -5,6 +5,7 @@ from fastapi.middleware.cors import CORSMiddleware
 # Routes
 #
 from app.routes import garment
+from app.routes import users
 
 app = FastAPI(
     title='Pershia Wardrobe API',
@@ -15,6 +16,7 @@ app = FastAPI(
 prefix_url = "/api"
 
 app.include_router(garment.router, prefix=prefix_url)
+app.include_router(users.router, prefix=prefix_url)
 
 # CORS para evitar request de otros sitios
 app.add_middleware(
