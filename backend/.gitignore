@@ -5,18 +5,14 @@ __pycache__/
 *.pyd
 .Python
 
-# docker
+# Docker (environment only)
 .env
 .env.example
-Dockerfile
 .dockerignore
 
-# alembic
+# Alembic
+.cache
 # alembic/
 # alembic/versions/
 # alembic/__pycache__/
 # alembic/versions/__pycache__/
-
-
-# Alembic autogenerate cache (if used)
-.cache

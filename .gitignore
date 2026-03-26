@@ -19,3 +19,19 @@ node_modules
 *.sqlite3
 *.db
 *.sqlite
+# Allow critical schema file
+!database/db_data.sql
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Docker
+.env
+.env.example
+.dockerignore
+# Allow critical Dockerfile
+!**/Dockerfile
