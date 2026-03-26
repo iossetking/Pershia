@@ -14,6 +14,7 @@ export default function PreviewModal({ isOpen, previewUrl, file, onClose, onConf
   // Si no está abierto o no hay imagen, no renderizamos nada
   if (!isOpen || !previewUrl || !file) return null;
 
+  
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/70 p-4 backdrop-blur-sm transition-opacity">
       <div className="bg-white p-6 rounded-3xl max-w-sm w-full shadow-2xl flex flex-col items-center animate-in fade-in zoom-in duration-200">
