@@ -22,6 +22,7 @@ services:
       retries: 5
       start_period: 10s
 
+#Backend
   backend:
     build:
       context: ./backend/wardrobe
@@ -36,6 +37,7 @@ services:
     volumes:
       - ./backend/wardrobe:/app
     # command: uvicorn app.main:app --host 0.0.0.0 --port 8000
+    
   alembic-cli:
     build: ./backend/wardrobe
     env_file:
@@ -46,6 +48,23 @@ services:
     volumes:
       - ./backend/wardrobe:/app
     command: [ "sleep", "infinity" ]
+
+# Frontend
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: nextjs-frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    environment:
+      NEXT_PUBLIC_API_URL: http://backend:8000
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+      - /app/.next
 
 volumes:
   pgdata:
