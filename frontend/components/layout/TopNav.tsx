@@ -16,7 +16,7 @@ function classNames(...classes: (string | boolean | undefined | null)[]) {
 export default function TopNav() {
   const pathname = usePathname()
   return (
-    <nav className="relative z-50 overflow-visible bg-white/10 after:pointer-events-none after:absolute after:inset-x-0 after:bottom-0 after:h-px after:bg-white/10">
+    <nav className="relative z-50 overflow-visible bg-white/80 backdrop-blur-sm after:pointer-events-none after:absolute after:inset-x-0 after:bottom-0 after:h-px after:bg-white/20">
       <div className="w-full px-4 sm:px-8 lg:px-12">
         <div className="relative flex h-16 items-center justify-between">
           <div className="flex flex-1 items-center justify-start">
@@ -38,9 +38,9 @@ export default function TopNav() {
                     href={item.href}
                     className={classNames(
                       isCurrent
-                        ? 'bg-[#CBCBCB] text-[#1E1E1E]'
-                        : 'text-[#1E1E1E] hover:bg-black/5 hover:text-white',
-                      'rounded-3xl px-3 sm:px-3 py-2 text-sm font-medium transition-colors'
+                        ? 'bg-white/50 text-gray-800 border border-white/80'
+                        : 'text-gray-700 hover:bg-white/30 border border-transparent hover:border-white/50',
+                      'rounded-3xl px-3 sm:px-3 py-2 text-sm font-medium transition-all backdrop-blur-sm'
                     )}
                   >
                     {item.name}

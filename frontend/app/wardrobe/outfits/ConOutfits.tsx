@@ -67,7 +67,7 @@ export default function ConOutfit() {
             key={outfit.id} 
             className="w-[160px] md:w-[250px] lg:w-[280px] shrink-0 rounded-2xl overflow-hidden cursor-pointer group bg-white shadow-sm hover:shadow-md transition-all duration-300 border border-gray-100 p-2"
           >
-            <div className="relative w-full aspect-[3/4] bg-[#faf6e9]/40 rounded-xl overflow-hidden group-hover:bg-[#faf6e9]/70 transition-colors">
+            <div className="relative w-full aspect-[3/4] bg-gray-100/40 rounded-xl overflow-hidden group-hover:bg-gray-100/70 transition-colors">
               <OutfitRenderer outfit={outfit} />
             </div>
           </div>

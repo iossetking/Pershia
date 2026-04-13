@@ -52,13 +52,13 @@ export default function DesignOutfitPage() {
 return (
     <div className="h-[calc(100dvh-120px)] p-4 md:p-4 flex flex-col overflow-hidden w-full relative ">
       <div className="flex items-center justify-between pb-2 shrink-0">
-        <Link href="/wardrobe/outfits" className="flex items-center gap-2 text-gray-600 hover:text-[#af925c]">
+        <Link href="/wardrobe/outfits" className="flex items-center gap-2 text-gray-600 hover:text-gray-700">
           <ArrowLeftIcon className="h-5 w-5" />
           <span className="hidden md:inline">Volver</span>
         </Link> 
         <button 
           onClick={handleSaveOutfit}
-          className="flex items-center gap-2 bg-[#af925c] text-white px-4 md:px-6 py-2 md:py-3 rounded-full shadow-md hover:bg-[#8d774a] transition-all duration-300 text-sm md:text-base"
+          className="flex items-center gap-2 bg-gray-700 text-white px-4 md:px-6 py-2 md:py-3 rounded-full shadow-md hover:bg-gray-800 transition-all duration-300 text-sm md:text-base"
         >
           <SparklesIcon className="h-5 w-5" />
           Guardar

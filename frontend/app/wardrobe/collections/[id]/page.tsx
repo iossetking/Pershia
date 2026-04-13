@@ -26,7 +26,7 @@ export default function CollectionDetailPage({ params }: { params: Promise<{ id:
     return (
       <div className="min-h-[calc(100dvh-80px)] flex flex-col items-center justify-center p-6 text-center">
         <h2 className="text-2xl font-bold text-gray-800 mb-2">Colección no encontrada</h2>
-        <Link href="/wardrobe/collections" className="bg-[#af925c] text-white px-6 py-2 rounded-full font-medium">
+        <Link href="/wardrobe/collections" className="bg-gray-700 text-white px-6 py-2 rounded-full font-medium">
           Volver a mis colecciones
         </Link>
       </div>
@@ -45,9 +45,9 @@ export default function CollectionDetailPage({ params }: { params: Promise<{ id:
   ];
 
   return (
-    <div className="min-h-screen bg-[#faf6e9]/50 p-4 md:p-6 w-full pb-28"> 
+    <div className="min-h-screen bg-white p-4 md:p-6 w-full pb-28"> 
       
-      <Link href="/wardrobe/collections" className="flex items-center gap-2 text-gray-600 hover:text-[#af925c] w-fit mb-6 transition-colors">
+      <Link href="/wardrobe/collections" className="flex items-center gap-2 text-gray-600 hover:text-gray-700 w-fit mb-6 transition-colors">
         <ArrowLeftIcon className="h-5 w-5" />
         <span className="font-medium">Volver a Colecciones</span>
       </Link>
@@ -69,7 +69,7 @@ export default function CollectionDetailPage({ params }: { params: Promise<{ id:
             if (element.type === 'outfit') {
               return (
                 <div key={element.id} className="break-inside-avoid mb-4 bg-white rounded-3xl p-3 md:p-4 shadow-sm border border-gray-100 flex flex-col hover:shadow-md transition-shadow cursor-pointer group">
-                  <div className="relative w-full aspect-[3/4] bg-[#faf6e9]/30 rounded-2xl overflow-hidden border border-gray-50 group-hover:bg-[#faf6e9]/60 transition-colors flex items-center justify-center">
+                  <div className="relative w-full aspect-[3/4] bg-gray-100/30 rounded-2xl overflow-hidden border border-gray-50 group-hover:bg-gray-100/60 transition-colors flex items-center justify-center">
                     <OutfitRenderer outfit={element.data as any} />
                   </div>
                 </div>

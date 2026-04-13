@@ -90,7 +90,7 @@ export default function UploadButton() {
       {/* Pantalla de carga */}
       {isProcessing && (
         <div className="fixed inset-0 z-[110] flex flex-col items-center justify-center bg-black/60 backdrop-blur-sm">
-          <div className="w-12 h-12 border-4 border-white/30 border-t-[#af925c] rounded-full animate-spin mb-4"></div>
+          <div className="w-12 h-12 border-4 border-white/30 border-t-gray-700 rounded-full animate-spin mb-4"></div>
           <p className="text-white font-medium text-lg">Removing background...</p>
         </div>
       )}
@@ -114,7 +114,7 @@ export default function UploadButton() {
                 className="flex items-center justify-end gap-3 bg-white px-4 py-2 rounded-full shadow-lg text-gray-700 hover:bg-gray-50 transition-colors"
               >
                 <span className="text-sm font-medium">Tomar foto</span>
-                <div className="bg-[#af925c] p-2 rounded-full text-white">
+                <div className="bg-gray-700 p-2 rounded-full text-white">
                   <CameraIcon className="h-5 w-5" />
                 </div>
               </button>
@@ -125,7 +125,7 @@ export default function UploadButton() {
               className="flex items-center justify-end gap-3 bg-white px-4 py-2 rounded-full shadow-lg text-gray-700 hover:bg-gray-50 transition-colors"
             >
               <span className="text-sm font-medium">Elegir de galería</span>
-              <div className="bg-[#af925c] p-2 rounded-full text-white">
+              <div className="bg-gray-700 p-2 rounded-full text-white">
                 <PhotoIcon className="h-5 w-5" />
               </div>
             </button>
@@ -137,7 +137,7 @@ export default function UploadButton() {
 
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="bg-[#af925c] p-3 rounded-full text-white shadow-lg hover:bg-[#82745b] transition-all duration-300 ease-in-out"
+          className="bg-gray-700 p-3 rounded-full text-white shadow-lg hover:bg-gray-800 transition-all duration-300 ease-in-out"
           style={{ transform: isOpen ? 'rotate(45deg)' : 'rotate(0deg)' }}
         >
           <PlusIcon className="h-6 w-6" />
