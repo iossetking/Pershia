@@ -1,7 +1,4 @@
-# docker-compose.yml
 services:
-
-  # ── Base de Datos ──────────────────────
   db:
     image: pgvector/pgvector:pg16
     container_name: postgresql
@@ -47,5 +44,23 @@ services:
       - ./backend/wardrobe:/app
     command: [ "sleep", "infinity" ]
 
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    # environment:
+    #   - WDS_SOCKET_PORT=0
+    #   - CHOKIDAR_USEPOLLING=true
+    #   - HOST=0.0.0.0
+    #   - PORT=8080
+    depends_on:
+      - backend
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    working_dir: /app
+    command: npm run dev
 volumes:
   pgdata:
