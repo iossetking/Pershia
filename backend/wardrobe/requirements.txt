@@ -58,3 +58,7 @@ marqo
 
 # LangGraph
 langgraph==0.2.28
+
+langchain_nvidia_ai_endpoints
+
+langchain
