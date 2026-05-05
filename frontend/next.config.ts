@@ -10,11 +10,12 @@ const nextConfig: NextConfig = {
     },
   },
   webpack: (config) => {
+    const path = require('path');
     // Resolve onnxruntime-web to its bundled browser build
     config.resolve.alias = {
       ...config.resolve.alias,
-      'onnxruntime-web': require.resolve('onnxruntime-web/dist/ort.bundle.min.mjs'),
-      'onnxruntime-web/webgpu': require.resolve('onnxruntime-web/dist/ort.webgpu.bundle.min.mjs'),
+      'onnxruntime-web$': path.resolve(__dirname, 'node_modules/onnxruntime-web/dist/ort.bundle.min.mjs'),
+      'onnxruntime-web/webgpu$': path.resolve(__dirname, 'node_modules/onnxruntime-web/dist/ort.webgpu.bundle.min.mjs'),
     };
     return config;
   },
