@@ -38,7 +38,7 @@ export default function CategoriesMenu({ activecategory, setactivecategory }: Ca
     
       <div 
         className={classNames(
-          "sticky top-0 z-10 bg-[#e8d8af] -mx-2 px-2 pt-2 pb-1 transition-transform duration-300 ease-in-out",
+          "sticky top-0 z-10 bg-white -mx-2 px-2 pt-2 pb-1 transition-transform duration-300 ease-in-out",
           ViewNav ? "translate-y-0" : "-translate-y-[120%]"
         )}
       >
@@ -50,10 +50,10 @@ export default function CategoriesMenu({ activecategory, setactivecategory }: Ca
                 key={category}
                 onClick={() => setactivecategory(category)}
                 className={classNames(
-                  'shrink-0 rounded-full px-5 py-2 text-sm font-medium transition-colors',
+                  'shrink-0 rounded-full px-5 py-2 text-sm font-medium transition-colors backdrop-blur-lg border ',
                   isCurrent
-                    ? 'bg-[#B0A288] text-black' // Color del botón activo 
-                    : 'bg-[#D2C5AD] text-gray-800 hover:bg-[#C2B59D]' // Color de los inactivos
+                    ? 'bg-white/70 border-white/80 text-gray-800 shadow-[0_4px_12px_rgba(0,0,0,0.12),inset_0_1px_0_rgba(255,255,255,0.9)]' 
+                    : 'bg-white/40 border-white/50 text-gray-700 hover:bg-white/60 shadow-[0_2px_8px_rgba(0,0,0,0.08)]'
                   
                 )}
               >

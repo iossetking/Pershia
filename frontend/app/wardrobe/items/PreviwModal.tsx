@@ -40,7 +40,7 @@ export default function PreviewModal({ isOpen, previewUrl, file, onClose, onConf
           </button>
           <button 
             onClick={() => onConfirm(file)}
-            className="flex-1 flex items-center justify-center gap-2 py-3 rounded-full bg-[#af925c] text-white font-medium hover:bg-[#82745b] transition-colors shadow-md"
+            className="flex-1 flex items-center justify-center gap-2 py-3 rounded-full bg-gray-700 text-white font-medium hover:bg-gray-800 transition-colors shadow-md"
           >
             <CheckIcon className="w-5 h-5" />
             Subir

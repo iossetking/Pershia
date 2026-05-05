@@ -42,14 +42,14 @@ export default function Canvas({
     <div className="w-full lg:w-[40%] h-[60vh] lg:h-full flex justify-center items-center bg-white rounded-3xl shadow-sm border border-gray-100 p-4 md:p-6 overflow-hidden shrink-0">
       <div 
         id="design-canvas"
-        className="relative h-full aspect-[3/4] max-w-full bg-[#faf6e9]/30 rounded-2xl border-2 border-dashed border-[#d4cbb3] overflow-hidden"
+        className="relative h-full aspect-[3/4] max-w-full bg-white/30 rounded-2xl border-2 border-dashed border-gray-200 overflow-hidden"
         onPointerDown={(e) => {
           if ((e.target as HTMLElement).id === 'design-canvas') {
             setActiveItemId(null);
           }
         }}
       >
-        <p className="absolute top-4 left-0 w-full text-center text-[#af925c]/60 font-medium pointer-events-none z-0">
+        <p className="absolute top-4 left-0 w-full text-center text-gray-400/60 font-medium pointer-events-none z-0">
           Lienzo de Diseño
         </p>
         
@@ -107,10 +107,10 @@ export default function Canvas({
                 
                 <div className={`absolute -inset-1 border-2 rounded-lg pointer-events-none transition-colors duration-200
                   ${activeItemId === canvasItem.instanceId 
-                    ? 'border-[#af925c]/40' 
+                    ? 'border-gray-400/40' 
                     : 'border-transparent'
                   }
-                  lg:border-transparent lg:group-hover:border-[#af925c]/40
+                  lg:border-transparent lg:group-hover:border-gray-400/40
                 `}></div>
               </div>
             </Rnd>

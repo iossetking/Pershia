@@ -6,7 +6,7 @@ export default function DesignButton() {
   return (
     <Link 
       href="/wardrobe/outfits/design" 
-      className="fixed bottom-20 right-6 bg-white border-2 border-[#af925c] p-3 rounded-full text-[#af925c] shadow-lg z-50 hover:bg-[#faf6e9] transition-all duration-300 group"
+      className="fixed bottom-20 right-6 bg-white border-2 border-gray-700 p-3 rounded-full text-gray-700 shadow-lg z-50 hover:bg-gray-100 transition-all duration-300 group"
       aria-label="Diseñar nuevo outfit"
     >
       <BeakerIcon className="h-6 w-6 transition-transform group-hover:scale-110" />

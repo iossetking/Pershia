@@ -42,7 +42,7 @@ export default function Wardrobe({ onAddItem, onCloseMobile }: WardrobeProps) {
                 key={category}
                 onClick={() => setActiveCategory(category)}
                 className={`shrink-0 rounded-full px-4 py-1.5 text-sm font-medium transition-colors ${
-                  isCurrent ? 'bg-[#af925c] text-white' : 'bg-[#e6e2cd]/50 text-gray-700 hover:bg-[#e6e2cd]'
+                  isCurrent ? 'bg-gray-800 text-white' : 'bg-gray-200/50 text-gray-700 hover:bg-gray-200'
                 }`}
               >
                 {category}
@@ -61,7 +61,7 @@ export default function Wardrobe({ onAddItem, onCloseMobile }: WardrobeProps) {
                 onAddItem(item.id);
                 if (onCloseMobile) onCloseMobile();
               }}
-              className="relative group rounded-xl overflow-hidden border border-gray-100 aspect-square cursor-pointer hover:border-[#af925c] bg-gray-50 transition-colors"
+              className="relative group rounded-xl overflow-hidden border border-gray-100 aspect-square cursor-pointer hover:border-gray-400 bg-gray-50 transition-colors"
             >
               <img src={item.imageUrl} alt={item.category} className="w-full h-full object-contain p-2" />
               <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
