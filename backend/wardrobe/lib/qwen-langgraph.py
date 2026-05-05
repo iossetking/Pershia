@@ -1,16 +1,18 @@
 import os
-from langchain_nvidia_ai_endpoints import ChatNVIDIA
-from langgraph.graph import StateGraph, END
-from langchain.agents import create_agent
-# from langchain.core import tool
-from typing import TypedDict, Annotated
-import operator
-from dotenv import load_dotenv
 import base64
 import requests
 
-load_dotenv()
+from dotenv import load_dotenv
+from typing import TypedDict, Annotated
+import operator
 
+from langchain_nvidia_ai_endpoints import ChatNVIDIA
+from langchain_core.messages import SystemMessage, HumanMessage
+# from langgraph.graph import StateGraph, END
+# from langchain.agents import create_agent
+# from langchain.core import tool
+
+load_dotenv()
 
 llm = ChatNVIDIA(
   model="qwen/qwen3.5-397b-a17b",
@@ -21,26 +23,45 @@ llm = ChatNVIDIA(
   max_completion_tokens=16384,
 )
 
-
 system_prompt = """
   Analyze the main clothing item in this image.
     Do not use <think> tags. Respond ONLY with a valid JSON object.
-    Format: {\"color\": \"...\", \"fabric\": \"...\", \"category\": \"...\", \"style\": \"...\"}
+    Format: {\"color\": \"...\", \"fabric\": \"...\", \"category\": \"...\", \"style\": \"...\", \"description\": \"...\"}
 """
 
-# message = input("Has tu pregunta para el llm ").lower()
+try:
+  image_response = requests.get("https://m.media-amazon.com/images/I/31W54GTkMML._AC_SY1000_.jpg").content
+  base64_image = base64.b64encode(image_response).decode('utf-8')
+except Exception as e:
+  print(f"Error fetching image: {e}")
+  exit()
+
+# agent = create_agent(
+#   model=llm,
+#   system_prompt=system_prompt
+# )
+
+messages = [
+    SystemMessage(content=system_prompt),
+    HumanMessage(content=[
+        {
+            "type": "image_url",
+            "image_url": {
+                "url": f"data:image/jpeg;base64,{base64_image}"
+            }
+        }
+    ])
+]
+
+# results = agent.invoke({"messages": [{"role": "user", "content": {"type": "image", "base64": base64_image,"mime_type": "image/jpg"}}]})
 
 try:
-  base64_image = requests.get("https://m.media-amazon.com/images/I/31W54GTkMML._AC_SY1000_.jpg").content
-  base64_image = base64.b64encode(base64_image).decode('utf-8')
+    results = llm.invoke(messages)
+    # .content extracts just the text string from the AIMessage object
+    print(results.content)
 except Exception as e:
-  print(e)
+    print(f"Error during LLM invocation: {e}")
 
-agent = create_agent(model=llm, system_prompt=system_prompt)
-
-results = agent.invoke({"messages": [{"role": "user", "content": {"type": "image", "base64": base64_image,"mime_type": "image/jpg"}}]})
-
-print(results)
 #class GraphState(TypedDict):
 #    input: str
 #    output: str
@@ -66,4 +87,3 @@ print(results)
 #   if chunk.additional_kwargs and "reasoning_content" in chunk.additional_kwargs:
 #     print(chunk.additional_kwargs["reasoning_content"], end="")
 #   print(chunk.content, end="")
-
