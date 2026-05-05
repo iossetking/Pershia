@@ -49,12 +49,12 @@ export default function CollectionsList() {
         
         <button 
           onClick={handleCreateCollection} 
-          className="flex flex-col items-center justify-center w-full aspect-[3/4] bg-[#faf6e9]/30 rounded-3xl border-2 border-dashed border-[#d4cbb3] hover:border-[#af925c] hover:bg-white transition-all group p-4"
+          className="flex flex-col items-center justify-center w-full aspect-[3/4] bg-gray-50 rounded-3xl border-2 border-dashed border-gray-200 hover:border-gray-300 hover:bg-white transition-all group p-4"
         >
-          <div className="bg-[#e6e2cd] group-hover:bg-[#af925c] p-3 md:p-4 rounded-full transition-colors mb-3">
+          <div className="bg-gray-200 group-hover:bg-gray-300 p-3 md:p-4 rounded-full transition-colors mb-3">
             <PlusIcon className="h-6 w-6 md:h-8 md:w-8 text-gray-600 group-hover:text-white" />
           </div>
-          <span className="text-[#af925c] font-medium text-sm md:text-base text-center">
+          <span className="text-gray-700 font-medium text-sm md:text-base text-center">
             Crear Nueva<br/>Colección
           </span>
         </button>
@@ -77,9 +77,9 @@ export default function CollectionsList() {
               href={`/wardrobe/collections/${collection.id}`} 
               className="group flex flex-col bg-white rounded-3xl overflow-hidden shadow-sm border border-gray-100 hover:shadow-md transition-all p-3 aspect-[3/4]"
             >
-              <div className="grid grid-cols-2 grid-rows-2 gap-1.5 w-full aspect-square mb-3 rounded-xl overflow-hidden bg-[#e6e2cd]/10">
+              <div className="grid grid-cols-2 grid-rows-2 gap-1.5 w-full aspect-square mb-3 rounded-xl overflow-hidden bg-gray-100">
                 {displaySlots.map((slot, idx) => (
-                  <div key={idx} className="bg-[#faf6e9]/40 relative w-full h-full flex items-center justify-center">
+                  <div key={idx} className="bg-white relative w-full h-full flex items-center justify-center">
                     {slot ? (
                       slot.type === 'outfit' ? (
                         <OutfitRenderer outfit={slot.data as any} />
