@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { PlusIcon, CameraIcon, PhotoIcon } from '@heroicons/react/24/outline';
-import PreviewModal from './PreviwModal';
+import PreviewModal from './PreviewModal';
 import removeBackground from '@/lib/remove-bg';
 
 export default function UploadButton() {
