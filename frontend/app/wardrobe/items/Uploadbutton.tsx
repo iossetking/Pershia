@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { PlusIcon, CameraIcon, PhotoIcon } from '@heroicons/react/24/outline';
-import PreviewModal from './PreviwModal';
+import PreviewModal from './PreviewModal';
 import removeBackground from '@/lib/remove-bg';
 
 export default function UploadButton() {
@@ -79,9 +79,12 @@ export default function UploadButton() {
     setPreviewUrl(null);
   };
 
-  const handleConfirmUpload = (file: File) => {// Aquí es donde se guarda la imagen 
+  const handleConfirmUpload = (file: File) => {// Aquí es donde se guarda la imagen
     console.log("Archivo SIN FONDO listo para guardarse definitivamente:", file);
     alert(`Imagen confirmada y lista para guardar.`);
+
+
+
     handleCloseModal();
   };
 

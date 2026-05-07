@@ -59,6 +59,13 @@ CREATE TABLE garments (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+CREATE TABLE images (
+    image_id SERIAL PRIMARY KEY,
+    s3_url TEXT NOT NULL,
+    s3_key VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
 -- CREATE TABLE garment_embeddings (
 --     embedding_id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
 --     garment_id UUID REFERENCES garments(garment_id) ON DELETE CASCADE UNIQUE,

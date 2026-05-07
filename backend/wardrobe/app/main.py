@@ -4,7 +4,9 @@ from fastapi.middleware.cors import CORSMiddleware
 #
 # Routes
 #
-from app.routes import garment
+from app.routes import garment, upload
+from fastapi.staticfiles import StaticFiles
+import os
 
 app = FastAPI(
     title='Pershia Wardrobe API',
@@ -15,6 +17,14 @@ app = FastAPI(
 prefix_url = "/api"
 
 app.include_router(garment.router, prefix=prefix_url)
+app.include_router(upload.router, prefix=prefix_url)
+
+# Asegurar que el directorio de uploads exista
+if not os.path.exists("uploads"):
+    os.makedirs("uploads")
+
+# Servir archivos estáticos de uploads
+app.mount("/uploads", StaticFiles(directory="uploads"), name="uploads")
 
 # CORS para evitar request de otros sitios
 app.add_middleware(
