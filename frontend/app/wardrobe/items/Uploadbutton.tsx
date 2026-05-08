@@ -2,6 +2,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import { PlusIcon, CameraIcon, PhotoIcon } from '@heroicons/react/24/outline';
 import PreviewModal from './PreviewModal';
 import removeBackground from '@/lib/remove-bg';
+import { useUploadGarment } from '@/features/garments/hooks/useGarments';
 
 export default function UploadButton() {
   const galleryInputRef = useRef<HTMLInputElement>(null);
@@ -17,6 +18,8 @@ export default function UploadButton() {
 
   // Estado para saber si Python esta procesando la imagen
   const [isProcessing, setIsProcessing] = useState(false);
+
+  const { mutate: uploadGarment, isPending: isUploading } = useUploadGarment();
 
   useEffect(() => {
     if (typeof navigator !== 'undefined') {
@@ -79,19 +82,22 @@ export default function UploadButton() {
     setPreviewUrl(null);
   };
 
-  const handleConfirmUpload = (file: File) => {// Aquí es donde se guarda la imagen 
-    console.log("Archivo SIN FONDO listo para guardarse definitivamente:", file);
-    alert(`Imagen confirmada y lista para guardar.`);
-    handleCloseModal();
+  const handleConfirmUpload = (file: File) => {
+    uploadGarment(file, {
+      onSuccess: () => handleCloseModal(),
+      onError: () => alert("Error al subir la imagen. Intenta de nuevo."),
+    });
   };
 
   return (
     <>
       {/* Pantalla de carga */}
-      {isProcessing && (
+      {(isProcessing || isUploading) && (
         <div className="fixed inset-0 z-[110] flex flex-col items-center justify-center bg-black/60 backdrop-blur-sm">
           <div className="w-12 h-12 border-4 border-white/30 border-t-gray-700 rounded-full animate-spin mb-4"></div>
-          <p className="text-white font-medium text-lg">Removing background...</p>
+          <p className="text-white font-medium text-lg">
+            {isUploading ? 'Analyzing & saving...' : 'Removing background...'}
+          </p>
         </div>
       )}
 

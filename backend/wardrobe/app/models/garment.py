@@ -3,7 +3,7 @@ from datetime import datetime, timezone
 from typing import Optional
 
 def utc_now():
-    return datetime.now(timezone.utc)
+    return datetime.now(timezone.utc).replace(tzinfo=None)
 
 class GarmentBase(SQLModel):
     # Foreign key

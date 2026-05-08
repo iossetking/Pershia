@@ -49,12 +49,11 @@ class Settings(BaseSettings):
     # # CloudFront
     # CLOUDFRONT_URL: AnyHttpUrl
 
-    # # NVIDIA
-    # # NVIDIA KEY
-    # NVIDIA_API_KEY: str
+    # NVIDIA
+    NVIDIA_API_KEY: str = ""
 
-    # # Endpoint
-    # NIM_BASE_URL: str = "https://integrate.api.nvidia.com/v1"
+    # Endpoint
+    NIM_BASE_URL: str = "https://integrate.api.nvidia.com/v1"
 
     # Configuracion de pydantic-settings
     model_config = SettingsConfigDict(

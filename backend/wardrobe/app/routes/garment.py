@@ -1,9 +1,11 @@
-from fastapi import APIRouter, Depends, HTTPException, status, Query
+from fastapi import APIRouter, Depends, HTTPException, status, Query, UploadFile, File, Form
 from sqlmodel import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.models.garment import Garment, GarmentCreate, GarmentPublic
 from app.dependencies import get_db_session
+from app.services.image_service import save_image
+from app.services.qwen_service import analyze_garment
 
 router = APIRouter(
   prefix="/garments",
@@ -35,19 +37,31 @@ async def read_garment(
     return db_garment
 
 @router.post("/", response_model=GarmentPublic, status_code=status.HTTP_201_CREATED)
-async def create_garment(
-    garment: GarmentCreate,
+async def upload_garment(
+    file: UploadFile = File(...),
+    user_id: int = Form(default=1),
     session: AsyncSession = Depends(get_db_session)
 ):
-  try:
-    garment = Garment.model_validate(garment)
-    session.add(garment)
-    await session.commit()
-    await session.refresh(garment)
-    return garment
-  except Exception as e:
-    await session.rollback()
-    raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e))
+    image_path, relative_path = await save_image(file)
+    try:
+        metadata = await analyze_garment(image_path)
+        garment = Garment(
+            user_id=user_id,
+            s3_url=relative_path,
+            s3_key=image_path.name,
+            color=metadata.get("color", ""),
+            fabric=metadata.get("fabric", ""),
+            category=metadata.get("category", ""),
+            style=metadata.get("style", ""),
+        )
+        session.add(garment)
+        await session.commit()
+        await session.refresh(garment)
+        return garment
+    except Exception as e:
+        image_path.unlink(missing_ok=True)
+        await session.rollback()
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e))
 
 @router.put("/{garment_id}", response_model=GarmentPublic, status_code=status.HTTP_200_OK)
 async def update_garment(
