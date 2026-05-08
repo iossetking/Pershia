@@ -30,7 +30,7 @@ system_prompt = """
 """
 
 try:
-  image_response = requests.get("https://m.media-amazon.com/images/I/31W54GTkMML._AC_SY1000_.jpg").content
+  image_response = requests.get("https://m.media-amazon.com/images/I/81VHHC1iwGL._AC_UY1000_.jpg").content
   base64_image = base64.b64encode(image_response).decode('utf-8')
 except Exception as e:
   print(f"Error fetching image: {e}")

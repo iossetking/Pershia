@@ -15,14 +15,14 @@ END;
 $$ language 'plpgsql';
 
 -- ==============================================================================
--- MÓDULO 1 Y 2: USUARIOS Y CATÁLOGO 
+-- MÓDULO 1 Y 2: USUARIOS Y CATÁLOGO
 -- ==============================================================================
 -- CREATE TABLE users (
 --     user_id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
 --     username VARCHAR(50) NOT NULL,
 --     email VARCHAR(255) UNIQUE NOT NULL,
 --     hashed_pw VARCHAR(255) NOT NULL,
---     preferences TEXT, 
+--     preferences TEXT,
 --     created_at TIMESTAMPTZ DEFAULT NOW(),
 --     updated_at TIMESTAMPTZ DEFAULT NOW()
 -- );
@@ -54,6 +54,7 @@ CREATE TABLE garments (
     fabric VARCHAR(100),
     category VARCHAR(100),
     style VARCHAR(100),
+    description TEXT,
     is_public BOOLEAN DEFAULT FALSE,
     is_owned BOOLEAN DEFAULT TRUE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
@@ -121,7 +122,7 @@ CREATE TABLE collections_garments (
 --     garment_id UUID REFERENCES garments(garment_id) ON DELETE CASCADE,
 --     action VARCHAR(10) CHECK (action IN ('like', 'dislike', 'superlike')),
 --     created_at TIMESTAMPTZ DEFAULT NOW(),
---     UNIQUE(user_id, garment_id) 
+--     UNIQUE(user_id, garment_id)
 -- );
 -- CREATE INDEX idx_swipes_user ON user_swipes(user_id, action);
 
@@ -133,10 +134,10 @@ CREATE TABLE collections_garments (
 -- CREATE TABLE agent_sessions (
 --     session_id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
 --     user_id UUID REFERENCES users(user_id) ON DELETE CASCADE,
-    
+
 --     -- ¡CRÍTICO! Este es el ID que LangGraph usa internamente para recordar el estado
---     langgraph_thread_id VARCHAR(255) UNIQUE NOT NULL, 
-    
+--     langgraph_thread_id VARCHAR(255) UNIQUE NOT NULL,
+
 --     title VARCHAR(255),
 --     created_at TIMESTAMPTZ DEFAULT NOW(),
 --     updated_at TIMESTAMPTZ DEFAULT NOW()
@@ -155,5 +156,5 @@ CREATE TABLE collections_garments (
 -- );
 -- CREATE INDEX idx_messages_session ON chat_messages(session_id, created_at);
 
--- NOTA: LangGraph creará automáticamente sus propias tablas ocultas 
+-- NOTA: LangGraph creará automáticamente sus propias tablas ocultas
 -- (checkpoints, checkpoint_blobs) en esta misma base de datos usando `AsyncPostgresSaver`

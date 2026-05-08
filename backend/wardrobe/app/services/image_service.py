@@ -8,6 +8,7 @@ ITEMS_DIR.mkdir(exist_ok=True)
 
 
 async def save_image(file: UploadFile) -> tuple[Path, str]:
+    ITEMS_DIR.mkdir(parents=True, exist_ok=True)
     ext = Path(file.filename).suffix if file.filename else ".png"
     filename = f"{uuid.uuid4().hex}{ext}"
     dest = ITEMS_DIR / filename

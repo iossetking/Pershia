@@ -15,6 +15,7 @@ class GarmentBase(SQLModel):
     fabric: str = Field(nullable=False)
     category: str = Field(nullable=False)
     style: str = Field(nullable=False)
+    description: Optional[str] = Field(default=None)
     is_public: bool = Field(default=False)
     is_owned: bool = Field(default=False)
     created_at: datetime = Field(default_factory=utc_now)

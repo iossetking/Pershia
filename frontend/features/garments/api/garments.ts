@@ -5,6 +5,8 @@ const api = axios.create({
 });
 
 export const uploadGarment = async (file: File) => {
+  console.log("Uploading garment:", file);
+
   const formData = new FormData();
   formData.append('file', file);
 

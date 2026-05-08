@@ -42,8 +42,9 @@ async def upload_garment(
     user_id: int = Form(default=1),
     session: AsyncSession = Depends(get_db_session)
 ):
-    image_path, relative_path = await save_image(file)
+    image_path = None
     try:
+        image_path, relative_path = await save_image(file)
         metadata = await analyze_garment(image_path)
         garment = Garment(
             user_id=user_id,
@@ -53,13 +54,15 @@ async def upload_garment(
             fabric=metadata.get("fabric", ""),
             category=metadata.get("category", ""),
             style=metadata.get("style", ""),
+            description=metadata.get("description"),
         )
         session.add(garment)
         await session.commit()
         await session.refresh(garment)
         return garment
     except Exception as e:
-        image_path.unlink(missing_ok=True)
+        if image_path:
+            image_path.unlink(missing_ok=True)
         await session.rollback()
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e))
 

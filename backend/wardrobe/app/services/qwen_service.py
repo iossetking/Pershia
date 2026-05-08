@@ -20,7 +20,7 @@ _llm = ChatNVIDIA(
 _SYSTEM_PROMPT = (
     "Analyze the main clothing item in this image. "
     "Do not use <think> tags. Respond ONLY with a valid JSON object. "
-    'Format: {"color": "...", "fabric": "...", "category": "...", "style": "..."}'
+    'Format: {"color": "...", "fabric": "...", "category": "...", "style": "...", "description": "..."}'
 )
 
 
