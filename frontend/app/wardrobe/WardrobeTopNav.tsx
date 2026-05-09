@@ -1,6 +1,8 @@
 'use client'
+import { useRef, useState, useEffect } from 'react'
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
+import { Cog6ToothIcon, ArrowRightStartOnRectangleIcon } from '@heroicons/react/24/outline'
 import { useAuth } from '@/app/context/AuthContext'
 
 function getInitials(name: string | null, username: string): string {
@@ -18,14 +20,32 @@ const tabs = [
 ]
 
 export default function WardrobeTopNav() {
-  const { user } = useAuth()
+  const { user, logout } = useAuth()
   const pathname = usePathname()
+  const router = useRouter()
+  const [open, setOpen] = useState(false)
+  const dropdownRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    function handleClickOutside(e: MouseEvent) {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+        setOpen(false)
+      }
+    }
+    if (open) document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [open])
 
   if (!user) return null
 
   const initials = getInitials(user.name ?? null, user.username)
-
   const isFeed = pathname.startsWith('/wardrobe/feed')
+
+  const handleLogout = () => {
+    setOpen(false)
+    logout()
+    router.push('/')
+  }
 
   return (
     <div className="shrink-0 flex items-center justify-between px-4 pt-4 pb-3">
@@ -42,9 +62,7 @@ export default function WardrobeTopNav() {
               key={tab.name}
               href={tab.href}
               className={`px-4 py-1 rounded-full text-sm font-medium transition-all ${
-                active
-                  ? 'bg-white text-gray-800 shadow-sm'
-                  : 'text-gray-400 hover:text-gray-600'
+                active ? 'bg-white text-gray-800 shadow-sm' : 'text-gray-400 hover:text-gray-600'
               }`}
             >
               {tab.name}
@@ -53,9 +71,12 @@ export default function WardrobeTopNav() {
         })}
       </div>
 
-      {/* User */}
-      <div className="flex justify-end w-16">
-        <Link href="/wardrobe/profile" className="flex items-center gap-2 group">
+      {/* User dropdown */}
+      <div className="flex justify-end w-16 relative" ref={dropdownRef}>
+        <button
+          onClick={() => setOpen(prev => !prev)}
+          className="flex items-center gap-2 group focus:outline-none"
+        >
           <span className="text-sm text-gray-500 group-hover:text-gray-700 transition-colors hidden sm:block">
             {user.username}
           </span>
@@ -64,7 +85,33 @@ export default function WardrobeTopNav() {
               {initials}
             </span>
           </div>
-        </Link>
+        </button>
+
+        {open && (
+          <div className="absolute top-full right-0 mt-2 w-48 bg-white rounded-2xl shadow-lg border border-gray-100 py-1 z-50 overflow-hidden">
+            <div className="px-4 py-2.5 border-b border-gray-100">
+              <p className="text-xs font-semibold text-gray-800 truncate">{user.name ?? user.username}</p>
+              <p className="text-xs text-gray-400 truncate">{user.email}</p>
+            </div>
+
+            <Link
+              href="/wardrobe/profile"
+              onClick={() => setOpen(false)}
+              className="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-600 hover:bg-gray-50 transition-colors"
+            >
+              <Cog6ToothIcon className="w-4 h-4 text-gray-400" />
+              Settings
+            </Link>
+
+            <button
+              onClick={handleLogout}
+              className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-red-500 hover:bg-red-50 transition-colors"
+            >
+              <ArrowRightStartOnRectangleIcon className="w-4 h-4" />
+              Log out
+            </button>
+          </div>
+        )}
       </div>
     </div>
   )

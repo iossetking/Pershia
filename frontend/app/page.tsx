@@ -170,7 +170,7 @@ function ViewNormal() {
         <div className="flex flex-col items-center gap-4">
           <GoogleSignIn />
           <Link
-            href="/wardrobe"
+            href="/wardrobe/items"
             className="text-[#555] text-xs tracking-widest uppercase hover:text-[#888] transition-colors"
           >
             Continuar sin cuenta →
