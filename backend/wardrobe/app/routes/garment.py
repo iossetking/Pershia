@@ -15,10 +15,11 @@ router = APIRouter(
 @router.get("/", response_model=list[GarmentPublic], status_code=status.HTTP_200_OK)
 async def read_garments(
     session: AsyncSession = Depends(get_db_session),
+    user_id: int = Query(...),
     offset: int = Query(default=0, ge=0),
     limit: int = Query(default=10, ge=1, le=100)
 ):
-    statement = select(Garment).offset(offset).limit(limit)
+    statement = select(Garment).where(Garment.user_id == user_id).offset(offset).limit(limit)
     result = await session.execute(statement)
     garments = result.scalars().all()
     return garments

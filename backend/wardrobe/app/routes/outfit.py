@@ -32,10 +32,13 @@ async def _outfit_public(outfit: Outfit, session: AsyncSession) -> OutfitPublic:
 @router.get("/", response_model=list[OutfitPublic], status_code=status.HTTP_200_OK)
 async def read_outfits(
     session: AsyncSession = Depends(get_db_session),
+    user_id: int = Query(...),
     offset: int = Query(default=0, ge=0),
     limit: int = Query(default=20, ge=1, le=100),
 ):
-    result = await session.execute(select(Outfit).offset(offset).limit(limit))
+    result = await session.execute(
+        select(Outfit).where(Outfit.user_id == user_id).offset(offset).limit(limit)
+    )
     outfits = result.scalars().all()
     return [await _outfit_public(o, session) for o in outfits]
 

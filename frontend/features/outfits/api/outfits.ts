@@ -27,8 +27,8 @@ export interface OutfitCreate {
   garments: OutfitGarmentPosition[];
 }
 
-export const getOutfits = async (): Promise<Outfit[]> => {
-  const { data } = await api.get<Outfit[]>('/api/outfits/', { params: { limit: 100 } });
+export const getOutfits = async (userId: number): Promise<Outfit[]> => {
+  const { data } = await api.get<Outfit[]>('/api/outfits/', { params: { user_id: userId, limit: 100 } });
   return data;
 };
 

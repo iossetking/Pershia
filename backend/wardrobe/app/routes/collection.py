@@ -26,10 +26,13 @@ async def _collection_public(collection: Collection, session: AsyncSession) -> C
 @router.get("/", response_model=list[CollectionPublic], status_code=status.HTTP_200_OK)
 async def read_collections(
     session: AsyncSession = Depends(get_db_session),
+    user_id: int = Query(...),
     offset: int = Query(default=0, ge=0),
     limit: int = Query(default=20, ge=1, le=100),
 ):
-    result = await session.execute(select(Collection).offset(offset).limit(limit))
+    result = await session.execute(
+        select(Collection).where(Collection.user_id == user_id).offset(offset).limit(limit)
+    )
     collections = result.scalars().all()
     return [await _collection_public(c, session) for c in collections]
 

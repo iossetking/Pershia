@@ -28,8 +28,8 @@ export interface CollectionUpdate {
   is_public?: boolean;
 }
 
-export const getCollections = async (): Promise<Collection[]> => {
-  const { data } = await api.get<Collection[]>('/api/collections/', { params: { limit: 100 } });
+export const getCollections = async (userId: number): Promise<Collection[]> => {
+  const { data } = await api.get<Collection[]>('/api/collections/', { params: { user_id: userId, limit: 100 } });
   return data;
 };
 

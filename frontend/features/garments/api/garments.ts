@@ -19,14 +19,15 @@ export interface Garment {
   created_at: string;
 }
 
-export const getGarments = async (offset = 0, limit = 100): Promise<Garment[]> => {
-  const { data } = await api.get<Garment[]>('/api/garments/', { params: { offset, limit } });
+export const getGarments = async (userId: number, offset = 0, limit = 100): Promise<Garment[]> => {
+  const { data } = await api.get<Garment[]>('/api/garments/', { params: { user_id: userId, offset, limit } });
   return data;
 };
 
-export const uploadGarment = async (file: File): Promise<Garment> => {
+export const uploadGarment = async (file: File, userId: number): Promise<Garment> => {
   const formData = new FormData();
   formData.append('file', file);
+  formData.append('user_id', String(userId));
   const { data } = await api.post<Garment>('/api/garments/', formData);
   return data;
 };
