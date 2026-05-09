@@ -40,3 +40,5 @@ CLAUDE.md
 
 # Local garment image storage (temporary, before S3)
 backend/wardrobe/items/
+
+notes.md

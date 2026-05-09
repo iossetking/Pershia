@@ -49,6 +49,9 @@ class Settings(BaseSettings):
     # # CloudFront
     # CLOUDFRONT_URL: AnyHttpUrl
 
+    # Google OAuth
+    GOOGLE_CLIENT_ID: str = ""
+
     # NVIDIA
     NVIDIA_API_KEY: str = ""
 

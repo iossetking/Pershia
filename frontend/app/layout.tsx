@@ -17,8 +17,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="antialiased h-screen flex flex-col">
-        <TopNav />
         <Providers>
+          <TopNav />
           <main className="flex-1 flex flex-col overflow-y-auto">
             {children}
           </main>

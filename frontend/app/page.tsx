@@ -1,5 +1,6 @@
 import { headers } from 'next/headers'
 import Link from 'next/link'
+import GoogleSignIn from '@/components/auth/GoogleSignIn'
 
 // ── Detección server-side ────────────────────────────────────────────────────
 function check3DS(ua: string): boolean {
@@ -166,13 +167,15 @@ function ViewNormal() {
         <p className="text-[#888] text-base md:text-lg leading-relaxed mb-10 max-w-sm">
           Organiza tus prendas, diseña outfits y arma colecciones para cada ocasión.
         </p>
-        <Link
-          href="/wardrobe"
-          className="group relative inline-flex items-center gap-3 bg-[#c8a97e] text-[#0f0f0f] px-8 py-4 rounded-full font-bold text-sm tracking-widest uppercase transition-all duration-300 hover:bg-white hover:scale-105 shadow-[0_0_40px_rgba(200,169,126,0.25)]"
-        >
-          Entrar al armario
-          <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
-        </Link>
+        <div className="flex flex-col items-center gap-4">
+          <GoogleSignIn />
+          <Link
+            href="/wardrobe"
+            className="text-[#555] text-xs tracking-widest uppercase hover:text-[#888] transition-colors"
+          >
+            Continuar sin cuenta →
+          </Link>
+        </div>
         <div className="flex gap-8 mt-14 text-center">
           {[
             { icon: '👕', label: 'Items' },
