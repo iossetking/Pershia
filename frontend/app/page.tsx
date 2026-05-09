@@ -139,7 +139,7 @@ function View3DS() {
 // ── Vista normal ─────────────────────────────────────────────────────────────
 function ViewNormal() {
   return (
-    <div className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-[#0f0f0f]">
+    <div className="relative h-full flex-1 flex flex-col items-center justify-center overflow-hidden bg-[#0f0f0f]">
       <div
         className="absolute inset-0 opacity-[0.04]"
         style={{

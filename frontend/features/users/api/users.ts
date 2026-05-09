@@ -20,3 +20,8 @@ export const getUser = async (userId: number): Promise<User> => {
   const { data } = await api.get<User>(`/api/users/${userId}`);
   return data;
 };
+
+export const updateUsername = async (userId: number, username: string): Promise<User> => {
+  const { data } = await api.put<User>(`/api/users/${userId}`, { username });
+  return data;
+};

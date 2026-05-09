@@ -108,7 +108,7 @@ export default function DesignOutfitPage() {
   }, [canvasItems, createOutfit, router]);
 
   return (
-    <div className="h-[calc(100dvh-120px)] p-4 flex flex-col overflow-hidden w-full relative">
+    <div className="h-[calc(100dvh-168px)] p-4 flex flex-col overflow-hidden w-full relative">
       <div className="flex items-center justify-between pb-2 shrink-0">
         <Link href="/wardrobe/outfits" className="flex items-center gap-2 text-gray-600 hover:text-gray-700">
           <ArrowLeftIcon className="h-5 w-5" />

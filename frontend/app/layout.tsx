@@ -19,7 +19,7 @@ export default function RootLayout({
       <body className="antialiased h-screen flex flex-col">
         <Providers>
           <TopNav />
-          <main className="flex-1 flex flex-col overflow-y-auto">
+          <main className="flex-1 flex flex-col overflow-hidden">
             {children}
           </main>
         </Providers>
