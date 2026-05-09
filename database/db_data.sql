@@ -6,14 +6,6 @@
 
 CREATE EXTENSION IF NOT EXISTS vector;
 
-CREATE OR REPLACE FUNCTION update_modified_column()
-RETURNS TRIGGER AS $$
-BEGIN
-    NEW.updated_at = NOW();
-    RETURN NEW;
-END;
-$$ language 'plpgsql';
-
 -- ==============================================================================
 -- MÓDULO 1 Y 2: USUARIOS Y CATÁLOGO
 -- ==============================================================================
@@ -37,7 +29,6 @@ CREATE TABLE users (
     preferences TEXT,
     joined_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
-CREATE TRIGGER update_users_modtime BEFORE UPDATE ON users FOR EACH ROW EXECUTE FUNCTION update_modified_column();
 
 -- CREATE TABLE garments (
 --     garment_id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
