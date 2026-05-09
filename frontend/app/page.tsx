@@ -150,24 +150,24 @@ function ViewNormal() {
       <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-[#c8a97e]/10 blur-[120px] pointer-events-none" />
 
       <div className="relative z-10 flex flex-col items-center text-center px-6 max-w-xl">
-        <p className="text-xs tracking-[0.4em] uppercase text-[#c8a97e]/60 mb-4 font-light">
+        <p className="anim-fade-in anim-d1 text-xs tracking-[0.4em] uppercase text-[#c8a97e]/60 mb-4 font-light">
           Tu guardarropa digital
         </p>
         <h1
-          className="text-7xl md:text-9xl font-black text-white mb-2 leading-none"
+          className="anim-slide-up anim-d2 text-7xl md:text-9xl font-black text-white mb-2 leading-none"
           style={{ fontFamily: 'Georgia, serif', letterSpacing: '-0.04em' }}
         >
           Pershia
         </h1>
-        <div className="flex items-center gap-3 my-6 w-full justify-center">
+        <div className="anim-fade-in anim-d3 flex items-center gap-3 my-6 w-full justify-center">
           <div className="h-px w-16 bg-[#c8a97e]/30" />
           <div className="w-1.5 h-1.5 rounded-full bg-[#c8a97e]" />
           <div className="h-px w-16 bg-[#c8a97e]/30" />
         </div>
-        <p className="text-[#888] text-base md:text-lg leading-relaxed mb-10 max-w-sm">
+        <p className="anim-slide-up anim-d3 text-[#888] text-base md:text-lg leading-relaxed mb-10 max-w-sm">
           Organiza tus prendas, diseña outfits y arma colecciones para cada ocasión.
         </p>
-        <div className="flex flex-col items-center gap-4">
+        <div className="anim-slide-up anim-d4 flex flex-col items-center gap-4">
           <GoogleSignIn />
           <Link
             href="/wardrobe/items"
@@ -176,7 +176,7 @@ function ViewNormal() {
             Continuar sin cuenta →
           </Link>
         </div>
-        <div className="flex gap-8 mt-14 text-center">
+        <div className="anim-fade-in anim-d6 flex gap-8 mt-14 text-center">
           {[
             { icon: '👕', label: 'Items' },
             { icon: '✨', label: 'Outfits' },

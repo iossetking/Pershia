@@ -23,3 +23,40 @@ body {
   background: #fdfdfd;
   color: #1f1f1f;
 }
+
+/* ── Keyframes ─────────────────────────────────────────────── */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideUpCard {
+  from { opacity: 0; transform: translateY(32px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Utility classes ────────────────────────────────────────── */
+.anim-fade-in {
+  animation: fadeIn 0.5s ease both;
+}
+
+.anim-slide-up {
+  animation: slideUp 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.anim-slide-up-card {
+  animation: slideUpCard 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Stagger delays for landing page elements */
+.anim-d1  { animation-delay: 0.08s; }
+.anim-d2  { animation-delay: 0.18s; }
+.anim-d3  { animation-delay: 0.28s; }
+.anim-d4  { animation-delay: 0.40s; }
+.anim-d5  { animation-delay: 0.54s; }
+.anim-d6  { animation-delay: 0.70s; }

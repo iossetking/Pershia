@@ -34,13 +34,13 @@ export default function BottomNav() {
               href={item.href}
               className={classNames(
                 isCurrent
-                  ? 'bg-white/70 border-white/80 shadow-[inset_0_1px_0_rgba(255,255,255,0.9),0_2px_8px_rgba(0,0,0,0.10)] text-[#2F2020]'
-                  : 'bg-white/20 border-white/30 text-[#2F2020]/60 hover:bg-white/40 hover:text-[#2F2020]',
+                  ? 'bg-gray-800 text-white shadow-sm border-transparent'
+                  : 'bg-white/20 border-white/30 text-gray-500 hover:bg-white/40 hover:text-gray-700',
                 'flex-1 flex items-center justify-center',
                 'rounded-2xl py-2 px-3',
                 'text-sm sm:text-base font-medium',
                 'border transition-all duration-200',
-                'backdrop-blur-sm',
+                'backdrop-blur-sm focus:outline-none',
               )}
             >
               {item.name}
