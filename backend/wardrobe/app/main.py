@@ -6,7 +6,7 @@ from pathlib import Path
 #
 # Routes
 #
-from app.routes import garment, user
+from app.routes import garment, user, outfit
 
 app = FastAPI(
     title='Pershia Wardrobe API',
@@ -18,6 +18,7 @@ prefix_url = "/api"
 
 app.include_router(garment.router, prefix=prefix_url)
 app.include_router(user.router, prefix=prefix_url)
+app.include_router(outfit.router, prefix=prefix_url)
 
 # CORS para evitar request de otros sitios
 app.add_middleware(

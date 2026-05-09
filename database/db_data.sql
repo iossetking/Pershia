@@ -90,6 +90,10 @@ CREATE TABLE outfits (
 CREATE TABLE outfits_garments (
   outfit_id INTEGER REFERENCES outfits(outfit_id) ON DELETE CASCADE,
   garment_id INTEGER REFERENCES garments(garment_id) ON DELETE CASCADE,
+  pos_top FLOAT DEFAULT 0,
+  pos_left FLOAT DEFAULT 0,
+  pos_scale FLOAT DEFAULT 80,
+  pos_z_index INTEGER DEFAULT 1,
   PRIMARY KEY (outfit_id, garment_id)
 );
 

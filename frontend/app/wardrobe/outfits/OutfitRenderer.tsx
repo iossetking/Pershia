@@ -1,19 +1,19 @@
 import React from 'react';
 import { type Garment, API_BASE_URL } from '@/features/garments/api/garments';
-import { OutfitType } from './ConOutfits';
+import { type Outfit } from '@/features/outfits/api/outfits';
 
 interface OutfitRendererProps {
-  outfit: OutfitType;
+  outfit: Outfit;
   garments: Garment[];
 }
 
 export default function OutfitRenderer({ outfit, garments }: OutfitRendererProps) {
-  if (!outfit?.elements) return null;
+  if (!outfit?.garments?.length) return null;
 
   return (
     <div className="relative w-full h-full overflow-hidden">
-      {outfit.elements.map((element, index) => {
-        const garment = garments.find(g => g.garment_id === element.itemId);
+      {outfit.garments.map((el, index) => {
+        const garment = garments.find(g => g.garment_id === el.garment_id);
         if (!garment) return null;
         return (
           <img
@@ -22,10 +22,10 @@ export default function OutfitRenderer({ outfit, garments }: OutfitRendererProps
             alt={garment.category}
             className="absolute object-contain drop-shadow-sm"
             style={{
-              top: `${element.top}%`,
-              left: `${element.left}%`,
-              width: `${element.scale}%`,
-              zIndex: element.zIndex,
+              top: `${el.pos_top}%`,
+              left: `${el.pos_left}%`,
+              width: `${el.pos_scale}%`,
+              zIndex: el.pos_z_index,
             }}
           />
         );
