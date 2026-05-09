@@ -1,25 +1,25 @@
-// app/wardrobe/outfits/OutfitRenderer.tsx
 import React from 'react';
-import { Items } from '../items/ConItem';
+import { type Garment, API_BASE_URL } from '@/features/garments/api/garments';
 import { OutfitType } from './ConOutfits';
 
 interface OutfitRendererProps {
   outfit: OutfitType;
+  garments: Garment[];
 }
 
-export default function OutfitRenderer({ outfit }: OutfitRendererProps) {
-  if (!outfit || !outfit.elements) return null;
+export default function OutfitRenderer({ outfit, garments }: OutfitRendererProps) {
+  if (!outfit?.elements) return null;
 
   return (
     <div className="relative w-full h-full overflow-hidden">
       {outfit.elements.map((element, index) => {
-        const itemData = Items.find(i => i.id === element.itemId);
-        if (!itemData) return null;
+        const garment = garments.find(g => g.garment_id === element.itemId);
+        if (!garment) return null;
         return (
           <img
             key={index}
-            src={itemData.imageUrl}
-            alt={itemData.category}
+            src={`${API_BASE_URL}/${garment.s3_url}`}
+            alt={garment.category}
             className="absolute object-contain drop-shadow-sm"
             style={{
               top: `${element.top}%`,
