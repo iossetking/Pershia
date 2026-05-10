@@ -1,4 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { PlusIcon, CameraIcon, PhotoIcon } from '@heroicons/react/24/outline';
 import PreviewModal from './PreviewModal';
 import removeBackground from '@/lib/remove-bg';
@@ -91,14 +92,15 @@ export default function UploadButton() {
 
   return (
     <>
-      {/* Pantalla de carga */}
-      {(isProcessing || isUploading) && (
-        <div className="fixed inset-0 z-[110] flex flex-col items-center justify-center bg-black/60 backdrop-blur-sm">
+      {/* Pantalla de carga — rendered via portal to escape PageTransition's stacking context */}
+      {(isProcessing || isUploading) && createPortal(
+        <div className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-black/60 backdrop-blur-sm">
           <div className="w-12 h-12 border-4 border-white/30 border-t-gray-700 rounded-full animate-spin mb-4"></div>
           <p className="text-white font-medium text-lg">
             {isUploading ? 'Analyzing & saving...' : 'Removing background...'}
           </p>
-        </div>
+        </div>,
+        document.body
       )}
 
       {/* Modal de previsualización */}
