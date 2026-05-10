@@ -1,85 +1,171 @@
-![alt text](<Pershia logo.png>)
+![Pershia Logo](<Pershia logo.png>)
 
-<h1 align="cleft">PerShia Fashion app</h1>
+<h1 align="center">Pershia — AI Fashion App</h1>
 
 <p align="right">
-<img src="https://img.shields.io/badge/STATUS-EN%20DESAROLLO-green">
+  <img src="https://img.shields.io/badge/STATUS-IN%20DEVELOPMENT-green">
 </p>
 
-## Describcion del proyecto
-PerShia es una web app desarrollada con el fin de evitar un problema comun en la actualidad el **"Fast Fashion"**, muchas empresas al dia generan un sin fin de prendas al dia esto generando contaminacion ya que la industria de la moda genera aproximadamente el 20% de las aguas residuales a nivel mundial además, el sector consume cerca de 93,000 millones de metros cúbicos de agua al año.
+## About the Project
 
-La solucion a todo esto es PerShia, por medio de imagenes que el usuario suba a la web app de su ropero actual la IA le recomendara al usuario que prenda podria combinar ,  esto generando la no necesidad de comprar ropa , por otra parte se contara con otro apartado que se puede usar como inspiracion donde otros usuarios puedan subir sus estilos de ropa, se combinara el estilo de Pinterest y Tinder para generar una experiancia mas comoda e interactiva al usuario.
+Pershia is a web app built to tackle a common modern problem: **Fast Fashion**. The fashion industry generates roughly 20% of global wastewater and consumes around 93 billion cubic meters of water per year.
 
-## Instalar
+Pershia's solution is to help users get more out of the clothes they already own. Users upload photos of their wardrobe and the AI analyzes each garment — extracting color, fabric, category, and style — then recommends outfits by combining existing pieces. No new clothes needed.
 
-## Uso
- Nuestra plataforma de moda impulsada por IA permite a los usuarios digitalizar su armario y participar en una comunidad.
+---
 
- Su uso esta segmentado en estas partes :
+## Installation
 
- **1. Digitalización de Prendas (AI Analysis)**
+### Prerequisites
 
-Cuando un Usuario sube una imagen de una prenda, el Wardrobe System actúa como orquestador: Envía la imagen a Llama 4 Scout vía [HTTPS/REST] para obtener metadatos (color, material, tipo de prenda) y contexto de estilo.
-Esto en conjunto, persiste el archivo original en AWS S3 utilizando el SDK de AWS.
+- [Docker](https://www.docker.com/) and Docker Compose
+- A NVIDIA NIM API key (for Qwen vision model access)
+- A Google OAuth Client ID (for authentication)
 
-**2. Gestión del Guardarropa y Estilo**
+### Steps
 
-El usuario interactúa con su inventario para construir combinaciones. El sistema utiliza el contexto generado por la IA para sugerir qué prendas combinan mejor entre sí, basándose en la base de conocimientos del LLM.
+**1. Clone the repository**
 
-**3. Social Feed**
+```bash
+git clone https://github.com/your-username/Pershia.git
+cd Pershia
+```
 
-Una vez creado un outfit, el usuario puede publicarlo en el Social Feed:
+**2. Set up environment variables**
 
-- El feed funciona de manera asíncrona, consumiendo las imágenes directamente desde CloudFront para optimizar la latencia.
+Copy the example env file and fill in your credentials:
 
-- Interacción: Los usuarios realizan "swipes" (likes/dislikes), lo que alimenta el sistema de recomendaciones personalizadas para mostrar contenido más relevante en el futuro.
+```bash
+cp backend/wardrobe/.env.example .env
+```
 
-**Protocolos y Tecnologías**
+Edit `.env` with your values:
 
-- Comunicación: RESTful APIs sobre HTTPS.
+```env
+# Database
+POSTGRES_DB=pershia_db
+POSTGRES_USER=pershia
+POSTGRES_PASSWORD=pershia_password
 
-- IA: Procesamiento de lenguaje natural y visión por computadora mediante Llama 4.
+# JWT
+JWT_SECRET_KEY=your_secure_secret
+JWT_ALGORITHM=HS256
+ACCESS_TOKEN_EXPIRE_MINUTES=30
 
-- Almacenamiento: Cloud-native con AWS S3.
+# Google OAuth
+GOOGLE_CLIENT_ID=your_google_client_id
 
-- Entrega: Edge computing mediante CDN (CloudFront) para la visualización fluida del feed
+# NVIDIA NIM (Qwen)
+NVIDIA_API_KEY=your_nvidia_api_key
 
-## Tecnologías
+# AWS S3 (optional — local file storage is used by default)
+AWS_ACCESS_KEY_ID=your_access_key
+AWS_SECRET_ACCESS_KEY=your_secret_key
+AWS_REGION=us-east-1
+AWS_S3_BUCKET_NAME=pershia-images
+```
 
-El proyecto se basa en una arquitectura de microservicios y agentes de IA, diseñada para escalar de forma independiente el feed social y el motor de estilismo.
+**3. Start all services**
 
-| Capa / Componente | Tecnología | Rol en el Proyecto | Detalle según Diseño |
-| :--- | :--- | :--- | :--- |
-| **Frontend** | **React.JS** (+ TailwindCSS) | Interfaz de Usuario | Gestiona el "Wardrobe Frontend" y el "Social Feed" (UI tipo Tinder). |
-| **Backend APIs** | **FastAPI** (Python) | Orquestación y Lógica | Procesa peticiones del Guardarropa y el Feed Social mediante REST/HTTPS. |
-| **IA Agent Layer** | **LangGraph** | Flujo Conversacional | Orquesta el "LangGraph Agent" para clasificar la intención del usuario. |
-| **Modelos de ML** | **Llama 4** | Razonamiento LLM | Provee descripciones de prendas y lógica para el estilista conversacional. |
-| **Computer Vision** | **Fashion-CLIP** | Embeddings de Moda | Genera vectores de 512 dimensiones para indexar imágenes y texto. |
-| **Base de Datos** | **PostgreSQL** (+ pgvector) | Almacenamiento Vectorial | Persiste usuarios, prendas, outfits y los embeddings de búsqueda. |
-| **Storage** | **AWS S3** | Object Storage | Almacenamiento global de las imágenes de prendas cargadas. |
-| **Distribución** | **CloudFront** | CDN | Entrega global de contenido estático y fotos de outfits con baja latencia. |
+```bash
+docker compose up --build
+```
 
-## Areas
+This starts three services:
+- **PostgreSQL** (with pgvector) on port `5433`
+- **FastAPI backend** on port `8000`
+- **Next.js frontend** on port `8080`
 
-1.  **Wardrobe System:** Centrado en la gestión personal de prendas, donde **Fashion-CLIP** y **Llama 4** trabajan en conjunto para entender el estilo del usuario.
-2.  **Social Feed:** Un sistema desacoplado que consume los "outfits aprobados" para mostrarlos a otros usuarios, permitiendo interacciones como *swipes* y *likes*.
-3.  **Persistencia Híbrida:** Se utiliza PostgreSQL no solo para datos relacionales, sino como motor de búsqueda semántica gracias a la extensión `pgvector`.
+**4. Run database migrations**
 
-## Desarrolladores
+In a separate terminal, once the containers are running:
 
-<p align="center">Iosset Ivan Sandoval Gonzalez (Project Manager)
+```bash
+docker compose run --rm alembic-cli alembic upgrade head
+```
 
-<p align="center">Yohance Garrett Lopez (Pizzas y chescos)
+**5. Open the app**
 
-<p align="center">Oscar Josue Lopez Gonzalez(Frontend)
+Navigate to [http://localhost:8080](http://localhost:8080)
 
-<p align="center">Miguel Omar Flores García(DevOps)
+The API docs are available at [http://localhost:8000/docs](http://localhost:8000/docs)
 
-<p align="center">Rodrigo Alonso Castillo Ramirez (Frontend)
+---
 
-<p align="center">Adin Jared Rosas Silva(DataBase)
+## Usage
 
-<p align="center">Sebastian Sanchez Espinosa(Backend)
+### Wardrobe Management
 
-## Licencia y Autor
+Upload a photo of any clothing item and Pershia automatically:
+- Removes the background from the image (processed in-browser, no server needed)
+- Sends the image to Qwen via NVIDIA NIM to extract metadata: color, fabric, category, and style
+- Saves the garment to your personal wardrobe
+
+Garments are organized by category and can be filtered, grouped into collections, or used to build outfits.
+
+### Outfit Builder
+
+The drag-and-drop outfit designer lets you combine garments from your wardrobe into saved outfits. Outfits are stored and can be reviewed or deleted at any time.
+
+### AI Outfit Recommendations
+
+The recommendation feature analyzes your entire wardrobe visually and generates outfit combinations suited to a context you describe (e.g. "casual weekend" or "work meeting"). The AI returns three distinct outfit options with titles and descriptions.
+
+### Collections
+
+Group garments into named collections to organize your wardrobe by season, occasion, or any criteria you choose.
+
+---
+
+## Technologies
+
+| Layer | Technology | Role |
+| :--- | :--- | :--- |
+| **Frontend** | Next.js 16 + React 19 | App framework and routing |
+| **Styling** | Tailwind CSS v4 | Utility-first styling |
+| **UI Components** | Headless UI, Heroicons, MUI | Accessible components and icons |
+| **State / Data** | TanStack React Query + Axios | Server state management and HTTP |
+| **Background Removal** | @imgly/background-removal + ONNX Runtime Web | In-browser AI background removal (WebGL2) |
+| **Auth** | Google OAuth (@react-oauth/google) | User authentication |
+| **Backend** | FastAPI (Python 3.12) | REST API and business logic |
+| **AI / Vision** | Qwen 3.5 via NVIDIA NIM (LangChain) | Garment analysis and outfit recommendations |
+| **Database** | PostgreSQL 16 + pgvector | Relational storage with vector support |
+| **ORM / Migrations** | SQLModel + Alembic | Schema management and async queries |
+| **Containerization** | Docker + Docker Compose | Multi-service orchestration |
+| **Image Storage** | Local filesystem / AWS S3 | Garment image storage |
+
+---
+
+## API Endpoints
+
+| Method | Endpoint | Description |
+| :--- | :--- | :--- |
+| `GET` | `/health` | Health check |
+| `POST` | `/api/garments/` | Upload and analyze a garment |
+| `GET` | `/api/garments/` | List user garments |
+| `DELETE` | `/api/garments/{id}` | Delete a garment |
+| `GET` | `/api/outfits/` | List user outfits |
+| `POST` | `/api/outfits/` | Create an outfit |
+| `GET` | `/api/collections/` | List collections |
+| `POST` | `/api/collections/` | Create a collection |
+| `POST` | `/api/recommendation/` | Get AI outfit recommendations |
+
+---
+
+## Team
+
+| Name | Role |
+| :--- | :--- |
+| Iosset Ivan Sandoval Gonzalez | Project Manager |
+| Oscar Josue Lopez Gonzalez | Frontend |
+| Rodrigo Alonso Castillo Ramirez | Frontend |
+| Sebastian Sanchez Espinosa | Backend |
+| Adin Jared Rosas Silva | Database |
+| Miguel Omar Flores García | DevOps |
+| Yohance Garrett Lopez | Pizzas & Sodas |
+
+---
+
+## License
+
+MIT
