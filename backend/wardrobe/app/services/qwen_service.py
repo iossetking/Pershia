@@ -26,9 +26,17 @@ _recommend_llm = ChatNVIDIA(
     max_completion_tokens=2048,
 )
 
+_CATEGORIES = (
+    "T-shirt, Shirt, Blouse, Sweater, Hoodie, Tank top, Jacket, Coat, Cardigan, Vest, "
+    "Pants, Jeans, Shorts, Skirt, Leggings, Dress, Jumpsuit, Suit, Swimwear, "
+    "Shoes, Boots, Sneakers, Sandals, Hat, Scarf, Bag, Belt, Gloves, Socks"
+)
+
 _SYSTEM_PROMPT = (
     "Analyze the main clothing item in this image. "
     "Do not use <think> tags. Respond ONLY with a valid JSON object. "
+    f"For 'category', you MUST pick exactly one from this list: {_CATEGORIES}. "
+    "Choose the most general match — never invent a category outside this list. "
     'Format: {"color": "...", "fabric": "...", "category": "...", "style": "...", "description": "..."}'
 )
 

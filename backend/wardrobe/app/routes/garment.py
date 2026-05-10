@@ -53,7 +53,7 @@ async def upload_garment(
             s3_key=image_path.name,
             color=metadata.get("color", ""),
             fabric=metadata.get("fabric", ""),
-            category=metadata.get("category", ""),
+            category=metadata.get("category", "").strip().capitalize(),
             style=metadata.get("style", ""),
             description=metadata.get("description"),
         )
