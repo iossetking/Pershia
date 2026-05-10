@@ -162,7 +162,7 @@ Group garments into named collections to organize your wardrobe by season, occas
 | Sebastian Sanchez Espinosa | Backend |
 | Adin Jared Rosas Silva | Database |
 | Miguel Omar Flores García | DevOps |
-| Yohance Garrett Lopez | Pizzas & Sodas |
+| Yohance Garrett Lopez | Pizzas & Chescos & Backend |
 
 ---
 
