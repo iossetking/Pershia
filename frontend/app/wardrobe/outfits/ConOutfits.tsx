@@ -76,7 +76,7 @@ function OutfitDetailModal({ outfit, garments, onClose, onDelete }: { outfit: Ou
             <div className="flex justify-between items-start">
               <span className="text-xs font-semibold tracking-widest uppercase text-gray-400">Outfit</span>
               <div className="flex items-center gap-2">
-                <button onClick={onDelete} className="text-gray-300 hover:text-red-500 transition-colors" title="Eliminar outfit">
+                <button onClick={onDelete} className="text-gray-300 hover:text-red-500 transition-colors" title="Delete outfit">
                   <TrashIcon className="w-4 h-4" />
                 </button>
                 <button onClick={onClose} className="text-gray-400 hover:text-gray-700 transition-colors">
@@ -90,7 +90,7 @@ function OutfitDetailModal({ outfit, garments, onClose, onDelete }: { outfit: Ou
             </div>
             {prendas.length > 0 && (
               <div>
-                <span className="text-xs font-semibold uppercase tracking-wider text-gray-400 block mb-3">Prendas del outfit</span>
+                <span className="text-xs font-semibold uppercase tracking-wider text-gray-400 block mb-3">Outfit garments</span>
                 <div className="flex flex-col gap-2">
                   {prendas.map(garment => (
                     <button key={garment.garment_id} onClick={() => setSelectedGarment(garment)}
@@ -142,7 +142,7 @@ export default function ConOutfit() {
     return (
       <div className="mt-12 flex flex-col items-center gap-2 text-gray-400">
         <span className="text-4xl">✨</span>
-        <p className="text-sm">No hay outfits aún. ¡Diseña el primero!</p>
+        <p className="text-sm">No outfits yet. Design your first one!</p>
       </div>
     );
   }

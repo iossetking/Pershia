@@ -18,7 +18,7 @@ export default function PreviewModal({ isOpen, previewUrl, file, onClose, onConf
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/70 p-4 backdrop-blur-sm transition-opacity">
       <div className="bg-white p-6 rounded-3xl max-w-sm w-full shadow-2xl flex flex-col items-center animate-in fade-in zoom-in duration-200">
-        <h3 className="text-xl font-semibold mb-4 text-gray-800">¿Subir esta prenda?</h3>
+        <h3 className="text-xl font-semibold mb-4 text-gray-800">Upload this garment?</h3>
         
         {/* Previsualización de la imagen */}
         <div className="w-full aspect-[3/4] rounded-xl overflow-hidden mb-6 bg-gray-100 shadow-inner">
@@ -36,14 +36,14 @@ export default function PreviewModal({ isOpen, previewUrl, file, onClose, onConf
             className="flex-1 flex items-center justify-center gap-2 py-3 rounded-full border-2 border-gray-200 text-gray-600 font-medium hover:bg-gray-50 transition-colors"
           >
             <XMarkIcon className="w-5 h-5" />
-            Cancelar
+            Cancel
           </button>
           <button 
             onClick={() => onConfirm(file)}
             className="flex-1 flex items-center justify-center gap-2 py-3 rounded-full bg-gray-700 text-white font-medium hover:bg-gray-800 transition-colors shadow-md"
           >
             <CheckIcon className="w-5 h-5" />
-            Subir
+            Upload
           </button>
         </div>
       </div>

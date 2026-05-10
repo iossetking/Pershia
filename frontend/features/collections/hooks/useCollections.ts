@@ -42,7 +42,10 @@ export const useUpdateCollection = () => {
   return useMutation({
     mutationFn: ({ id, updates }: { id: number; updates: CollectionUpdate }) =>
       updateCollection(id, updates),
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['collections', 'list', user?.user_id] }),
+    onSuccess: (_, { id }) => {
+      queryClient.invalidateQueries({ queryKey: ['collections', 'list', user?.user_id] });
+      queryClient.invalidateQueries({ queryKey: ['collections', 'detail', id] });
+    },
   });
 };
 

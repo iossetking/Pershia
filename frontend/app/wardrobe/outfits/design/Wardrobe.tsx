@@ -61,7 +61,7 @@ export default function Wardrobe({ onAddItem, onCloseMobile }: WardrobeProps) {
         ) : filtered.length === 0 ? (
           <div className="flex flex-col items-center justify-center h-full gap-2 text-gray-400">
             <span className="text-3xl">👕</span>
-            <p className="text-sm">No hay prendas aún</p>
+            <p className="text-sm">No garments yet</p>
           </div>
         ) : (
           <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">

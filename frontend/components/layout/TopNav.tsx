@@ -70,9 +70,9 @@ export default function TopNav() {
               Sign out
             </button>
           </>
-        ) : (
+        ) : process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID ? (
           <AuthButtons />
-        )}
+        ) : null}
       </div>
     </nav>
   )

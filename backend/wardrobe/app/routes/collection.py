@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Depends, HTTPException, status, Query
-from sqlmodel import select
+from sqlmodel import select, delete
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.models.collection import (
@@ -88,8 +88,26 @@ async def update_collection(
         collection = await session.get(Collection, collection_id)
         if not collection:
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Collection not found")
-        collection.sqlmodel_update(collection_data.model_dump(exclude_unset=True))
-        session.add(collection)
+
+        scalar_fields = collection_data.model_dump(exclude_unset=True, exclude={"garment_ids", "outfit_ids"})
+        if scalar_fields:
+            collection.sqlmodel_update(scalar_fields)
+            session.add(collection)
+
+        if collection_data.garment_ids is not None:
+            await session.execute(
+                delete(CollectionGarment).where(CollectionGarment.collection_id == collection_id)
+            )
+            for gid in set(collection_data.garment_ids):
+                session.add(CollectionGarment(collection_id=collection_id, garment_id=gid))
+
+        if collection_data.outfit_ids is not None:
+            await session.execute(
+                delete(CollectionOutfit).where(CollectionOutfit.collection_id == collection_id)
+            )
+            for oid in set(collection_data.outfit_ids):
+                session.add(CollectionOutfit(collection_id=collection_id, outfit_id=oid))
+
         await session.commit()
         await session.refresh(collection)
         return await _collection_public(collection, session)

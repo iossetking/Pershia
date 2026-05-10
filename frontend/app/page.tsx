@@ -97,7 +97,7 @@ function View3DS() {
       <body>
         <div className="header">
           <div className="logo">PERSHIA</div>
-          <div className="tagline">TU GUARDARROPA DIGITAL</div>
+          <div className="tagline">YOUR DIGITAL WARDROBE</div>
         </div>
 
         <div className="hero">
@@ -108,25 +108,25 @@ function View3DS() {
             height="120"
             style={{ display:'block', margin:'0 auto 10px', border:'2px solid #fff' }}
           />
-          <div className="hero-title">Organiza tu estilo</div>
+          <div className="hero-title">Organize your style</div>
           <div className="hero-desc">
-            Guarda tus prendas, crea outfits y arma colecciones.
+            Save your garments, create outfits and build collections.
           </div>
-          <a className="btn" href="/wardrobe">ENTRAR AL ARMARIO</a>
+          <a className="btn" href="/wardrobe">ENTER WARDROBE</a>
         </div>
 
         <div className="features">
           <div className="feat">
             <div className="feat-title">👕 Items</div>
-            <div className="feat-desc">Registra cada prenda de tu closet</div>
+            <div className="feat-desc">Register every garment in your closet</div>
           </div>
           <div className="feat">
             <div className="feat-title">✨ Outfits</div>
-            <div className="feat-desc">Combina prendas y guarda looks</div>
+            <div className="feat-desc">Combine garments and save looks</div>
           </div>
           <div className="feat">
-            <div className="feat-title">📁 Colecciones</div>
-            <div className="feat-desc">Agrupa por ocasión o temporada</div>
+            <div className="feat-title">📁 Collections</div>
+            <div className="feat-desc">Group by occasion or season</div>
           </div>
         </div>
 
@@ -151,7 +151,7 @@ function ViewNormal() {
 
       <div className="relative z-10 flex flex-col items-center text-center px-6 max-w-xl">
         <p className="anim-fade-in anim-d1 text-xs tracking-[0.4em] uppercase text-[#c8a97e]/60 mb-4 font-light">
-          Tu guardarropa digital
+          Your digital wardrobe
         </p>
         <h1
           className="anim-slide-up anim-d2 text-7xl md:text-9xl font-black text-white mb-2 leading-none"
@@ -165,7 +165,7 @@ function ViewNormal() {
           <div className="h-px w-16 bg-[#c8a97e]/30" />
         </div>
         <p className="anim-slide-up anim-d3 text-[#888] text-base md:text-lg leading-relaxed mb-10 max-w-sm">
-          Organiza tus prendas, diseña outfits y arma colecciones para cada ocasión.
+          Organize your garments, design outfits and build collections for every occasion.
         </p>
         <div className="anim-slide-up anim-d4 flex flex-col items-center gap-4">
           <GoogleSignIn />
@@ -173,14 +173,14 @@ function ViewNormal() {
             href="/wardrobe/items"
             className="text-[#555] text-xs tracking-widest uppercase hover:text-[#888] transition-colors"
           >
-            Continuar sin cuenta →
+            Continue without account →
           </Link>
         </div>
         <div className="anim-fade-in anim-d6 flex gap-8 mt-14 text-center">
           {[
             { icon: '👕', label: 'Items' },
             { icon: '✨', label: 'Outfits' },
-            { icon: '📁', label: 'Colecciones' },
+            { icon: '📁', label: 'Collections' },
           ].map(f => (
             <div key={f.label} className="flex flex-col items-center gap-1">
               <span className="text-2xl">{f.icon}</span>

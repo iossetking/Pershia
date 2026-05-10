@@ -2,9 +2,9 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { createPortal } from 'react-dom';
-import { PlusIcon, XMarkIcon, CheckIcon } from '@heroicons/react/24/outline';
+import { PlusIcon, XMarkIcon, CheckIcon, TrashIcon } from '@heroicons/react/24/outline';
 import OutfitRenderer from '../outfits/OutfitRenderer';
-import { useCollections, useCreateCollection } from '@/features/collections/hooks/useCollections';
+import { useCollections, useCreateCollection, useDeleteCollection } from '@/features/collections/hooks/useCollections';
 import { useOutfits } from '@/features/outfits/hooks/useOutfits';
 import { useGarments } from '@/features/garments/hooks/useGarments';
 import { API_BASE_URL } from '@/features/garments/api/garments';
@@ -65,7 +65,7 @@ function CreateCollectionModal({ onClose }: { onClose: () => void }) {
       >
         {/* Header */}
         <div className="flex items-center justify-between px-5 pt-5 pb-3 border-b border-gray-100">
-          <h2 className="text-lg font-bold text-gray-900">Nueva Colección</h2>
+          <h2 className="text-lg font-bold text-gray-900">New Collection</h2>
           <button onClick={onClose} className="text-gray-400 hover:text-gray-700 transition-colors">
             <XMarkIcon className="w-5 h-5" />
           </button>
@@ -76,7 +76,7 @@ function CreateCollectionModal({ onClose }: { onClose: () => void }) {
           <input
             autoFocus
             type="text"
-            placeholder="Nombre de la colección…"
+            placeholder="Collection name…"
             value={title}
             onChange={e => setTitle(e.target.value)}
             onKeyDown={e => e.key === 'Enter' && handleCreate()}
@@ -96,7 +96,7 @@ function CreateCollectionModal({ onClose }: { onClose: () => void }) {
                   : 'bg-gray-100 text-gray-500 hover:bg-gray-200'
               }`}
             >
-              {tab === 'outfits' ? 'Outfits' : 'Prendas'}
+              {tab === 'outfits' ? 'Outfits' : 'Garments'}
               {tab === 'outfits' && selectedOutfitIds.size > 0 && (
                 <span className="ml-1.5 bg-white text-gray-800 rounded-full px-1.5 py-0.5 text-xs">
                   {selectedOutfitIds.size}
@@ -115,7 +115,7 @@ function CreateCollectionModal({ onClose }: { onClose: () => void }) {
         <div className="flex-1 overflow-y-auto px-5 pb-2">
           {activeTab === 'outfits' && (
             outfits.length === 0 ? (
-              <p className="text-sm text-gray-400 text-center py-10">No hay outfits aún.</p>
+              <p className="text-sm text-gray-400 text-center py-10">No outfits yet.</p>
             ) : (
               <div className="grid grid-cols-3 sm:grid-cols-4 gap-3">
                 {outfits.map((outfit: Outfit) => {
@@ -148,7 +148,7 @@ function CreateCollectionModal({ onClose }: { onClose: () => void }) {
 
           {activeTab === 'garments' && (
             garments.length === 0 ? (
-              <p className="text-sm text-gray-400 text-center py-10">No hay prendas aún.</p>
+              <p className="text-sm text-gray-400 text-center py-10">No garments yet.</p>
             ) : (
               <div className="grid grid-cols-3 sm:grid-cols-4 gap-3">
                 {garments.map((garment: Garment) => {
@@ -187,8 +187,8 @@ function CreateCollectionModal({ onClose }: { onClose: () => void }) {
             className="w-full bg-gray-800 hover:bg-gray-900 disabled:bg-gray-200 disabled:text-gray-400 text-white font-semibold rounded-2xl py-3 text-sm transition-colors"
           >
             {createCollection.isPending
-              ? 'Creando…'
-              : `Crear colección${totalSelected > 0 ? ` · ${totalSelected} elementos` : ''}`}
+              ? 'Creating…'
+              : `Create collection${totalSelected > 0 ? ` · ${totalSelected} items` : ''}`}
           </button>
         </div>
       </div>
@@ -204,6 +204,7 @@ export default function CollectionsList() {
   const { data: collections = [], isLoading } = useCollections();
   const { data: outfits = [] } = useOutfits();
   const { data: garments = [] } = useGarments();
+  const deleteCollection = useDeleteCollection();
 
   if (isLoading) {
     return (
@@ -227,7 +228,7 @@ export default function CollectionsList() {
             <PlusIcon className="h-6 w-6 md:h-8 md:w-8 text-gray-600 group-hover:text-white" />
           </div>
           <span className="text-gray-700 font-medium text-sm md:text-base text-center">
-            Crear Nueva<br />Colección
+            Create New<br />Collection
           </span>
         </button>
 
@@ -250,8 +251,20 @@ export default function CollectionsList() {
             <Link
               key={collection.collection_id}
               href={`/wardrobe/collections/${collection.collection_id}`}
-              className="group flex flex-col bg-white rounded-3xl overflow-hidden shadow-sm border border-gray-100 hover:shadow-md transition-all p-3 aspect-[3/4]"
+              className="group relative flex flex-col bg-white rounded-3xl overflow-hidden shadow-sm border border-gray-100 hover:shadow-md transition-all p-3 aspect-[3/4]"
             >
+              <button
+                onClick={e => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  if (confirm('Delete this collection?')) {
+                    deleteCollection.mutate(collection.collection_id);
+                  }
+                }}
+                className="absolute top-3 right-3 z-10 p-1.5 rounded-full bg-white/80 text-gray-400 hover:bg-red-50 hover:text-red-500 transition-colors opacity-0 group-hover:opacity-100"
+              >
+                <TrashIcon className="h-4 w-4" />
+              </button>
               <div className="grid grid-cols-2 grid-rows-2 gap-1.5 w-full aspect-square mb-3 rounded-xl overflow-hidden bg-gray-100">
                 {slots.map((slot, idx) => (
                   <div key={idx} className="bg-white relative w-full h-full flex items-center justify-center">
@@ -277,7 +290,7 @@ export default function CollectionsList() {
               <div className="flex-1 flex flex-col justify-end">
                 <h3 className="text-sm md:text-base font-semibold text-gray-800 line-clamp-1">{collection.title}</h3>
                 <span className="text-xs text-gray-400 mt-1">
-                  {collection.outfit_ids.length} Outfits · {collection.garment_ids.length} Prendas
+                  {collection.outfit_ids.length} Outfits · {collection.garment_ids.length} Garments
                 </span>
               </div>
             </Link>

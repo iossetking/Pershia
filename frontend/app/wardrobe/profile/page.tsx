@@ -53,7 +53,7 @@ export default function ProfilePage() {
       setUser(updated)
       setEditingUsername(false)
     } catch {
-      setError('No se pudo guardar el nombre de usuario.')
+      setError("Couldn't save username.")
     } finally {
       setIsSaving(false)
     }
@@ -65,7 +65,7 @@ export default function ProfilePage() {
     setError('')
   }
 
-  const joined = new Date(user.joined_at).toLocaleDateString('es-ES', {
+  const joined = new Date(user.joined_at).toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'long',
     day: 'numeric',
@@ -78,7 +78,7 @@ export default function ProfilePage() {
         className="flex items-center gap-2 text-gray-500 hover:text-gray-700 transition-colors mb-6"
       >
         <ArrowLeftIcon className="h-4 w-4" />
-        <span className="text-sm font-medium">Volver</span>
+        <span className="text-sm font-medium">Back</span>
       </button>
 
       {/* Avatar */}
@@ -99,7 +99,7 @@ export default function ProfilePage() {
         <div className="flex flex-col gap-1">
           <div className="flex items-center justify-between">
             <span className="text-xs font-semibold uppercase tracking-wider text-gray-400">
-              Nombre de usuario
+              Username
             </span>
             {!editingUsername && (
               <button
@@ -107,7 +107,7 @@ export default function ProfilePage() {
                 className="flex items-center gap-1 text-xs text-gray-400 hover:text-gray-600 transition-colors"
               >
                 <PencilIcon className="h-3 w-3" />
-                Editar
+                Edit
               </button>
             )}
           </div>
@@ -152,9 +152,9 @@ export default function ProfilePage() {
         </div>
 
         {/* Read-only fields */}
-        {user.name && <Field label="Nombre completo" value={user.name} />}
-        <Field label="Correo electrónico" value={user.email} />
-        <Field label="Miembro desde" value={joined} />
+        {user.name && <Field label="Full name" value={user.name} />}
+        <Field label="Email" value={user.email} />
+        <Field label="Member since" value={joined} />
       </div>
     </div>
   )

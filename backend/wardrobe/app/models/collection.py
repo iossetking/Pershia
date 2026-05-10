@@ -48,6 +48,8 @@ class CollectionUpdate(SQLModel):
     title: Optional[str] = None
     description: Optional[str] = None
     is_public: Optional[bool] = None
+    garment_ids: Optional[list[int]] = None
+    outfit_ids: Optional[list[int]] = None
 
 
 class CollectionPublic(CollectionBase):

@@ -6,7 +6,7 @@ export default function FeedPage() {
       </div>
       <h1 className="text-xl font-bold text-gray-800 mb-2">Feed coming soon</h1>
       <p className="text-sm text-gray-400 max-w-xs leading-relaxed">
-        Pronto podrás explorar outfits e inspiración de otros usuarios.
+        Soon you'll be able to explore outfits and inspiration from other users.
       </p>
     </div>
   )

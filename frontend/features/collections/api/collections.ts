@@ -26,6 +26,8 @@ export interface CollectionUpdate {
   title?: string;
   description?: string;
   is_public?: boolean;
+  garment_ids?: number[];
+  outfit_ids?: number[];
 }
 
 export const getCollections = async (userId: number): Promise<Collection[]> => {

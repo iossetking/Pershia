@@ -1,3 +1,4 @@
+import traceback
 from fastapi import APIRouter, Depends, HTTPException, status, Query
 from sqlmodel import select, or_
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -116,5 +117,6 @@ async def google_auth(
         await session.refresh(user)
         return user
     except Exception as e:
+        traceback.print_exc()
         await session.rollback()
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e))

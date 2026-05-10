@@ -85,7 +85,7 @@ export default function UploadButton() {
   const handleConfirmUpload = (file: File) => {
     uploadGarment(file, {
       onSuccess: () => handleCloseModal(),
-      onError: () => alert("Error al subir la imagen. Intenta de nuevo."),
+      onError: () => alert("Error uploading image. Please try again."),
     });
   };
 
@@ -119,7 +119,7 @@ export default function UploadButton() {
                 onClick={handleCameraClick}
                 className="flex items-center justify-end gap-3 bg-white px-4 py-2 rounded-full shadow-lg text-gray-700 hover:bg-gray-50 transition-colors"
               >
-                <span className="text-sm font-medium">Tomar foto</span>
+                <span className="text-sm font-medium">Take photo</span>
                 <div className="bg-gray-700 p-2 rounded-full text-white">
                   <CameraIcon className="h-5 w-5" />
                 </div>
@@ -130,7 +130,7 @@ export default function UploadButton() {
               onClick={handleGalleryClick}
               className="flex items-center justify-end gap-3 bg-white px-4 py-2 rounded-full shadow-lg text-gray-700 hover:bg-gray-50 transition-colors"
             >
-              <span className="text-sm font-medium">Elegir de galería</span>
+              <span className="text-sm font-medium">Choose from gallery</span>
               <div className="bg-gray-700 p-2 rounded-full text-white">
                 <PhotoIcon className="h-5 w-5" />
               </div>

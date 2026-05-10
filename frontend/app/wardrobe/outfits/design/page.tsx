@@ -20,17 +20,17 @@ function SaveModal({ onConfirm, onCancel, isPending }: {
     <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/50 backdrop-blur-sm p-4" onClick={onCancel}>
       <div className="bg-white rounded-3xl w-full max-w-sm p-6 shadow-2xl flex flex-col gap-5" onClick={e => e.stopPropagation()}>
         <div className="flex justify-between items-center">
-          <h2 className="text-lg font-bold text-gray-900">Guardar outfit</h2>
+          <h2 className="text-lg font-bold text-gray-900">Save outfit</h2>
           <button onClick={onCancel} className="text-gray-400 hover:text-gray-700"><XMarkIcon className="w-5 h-5" /></button>
         </div>
 
         <div className="flex flex-col gap-3">
           <div>
-            <label className="text-xs font-semibold uppercase tracking-wider text-gray-400 block mb-1">Nombre *</label>
+            <label className="text-xs font-semibold uppercase tracking-wider text-gray-400 block mb-1">Name *</label>
             <input
               autoFocus
               type="text"
-              placeholder="Mi outfit favorito"
+              placeholder="My favorite outfit"
               value={title}
               onChange={e => setTitle(e.target.value)}
               onKeyDown={e => e.key === 'Enter' && title.trim() && onConfirm(title.trim(), description.trim())}
@@ -38,9 +38,9 @@ function SaveModal({ onConfirm, onCancel, isPending }: {
             />
           </div>
           <div>
-            <label className="text-xs font-semibold uppercase tracking-wider text-gray-400 block mb-1">Descripción <span className="normal-case font-normal">(opcional)</span></label>
+            <label className="text-xs font-semibold uppercase tracking-wider text-gray-400 block mb-1">Description <span className="normal-case font-normal">(optional)</span></label>
             <textarea
-              placeholder="Un look relajado para el día a día..."
+              placeholder="A relaxed everyday look..."
               value={description}
               onChange={e => setDescription(e.target.value)}
               rows={3}
@@ -55,7 +55,7 @@ function SaveModal({ onConfirm, onCancel, isPending }: {
           className="w-full bg-gray-800 text-white py-3 rounded-2xl font-semibold text-sm disabled:opacity-40 disabled:cursor-not-allowed hover:bg-gray-900 transition-colors flex items-center justify-center gap-2"
         >
           <SparklesIcon className="w-4 h-4" />
-          {isPending ? 'Guardando...' : 'Guardar outfit'}
+          {isPending ? 'Saving...' : 'Save outfit'}
         </button>
       </div>
     </div>
@@ -112,7 +112,7 @@ export default function DesignOutfitPage() {
       <div className="flex items-center justify-between pb-2 shrink-0">
         <Link href="/wardrobe/outfits" className="flex items-center gap-2 text-gray-600 hover:text-gray-700">
           <ArrowLeftIcon className="h-5 w-5" />
-          <span className="hidden md:inline">Volver</span>
+          <span className="hidden md:inline">Back</span>
         </Link>
         <button
           onClick={() => canvasItems.length > 0 && setShowSaveModal(true)}
@@ -120,7 +120,7 @@ export default function DesignOutfitPage() {
           className="flex items-center gap-2 bg-gray-700 text-white px-4 md:px-6 py-2 md:py-3 rounded-full shadow-md hover:bg-gray-800 transition-all duration-300 text-sm md:text-base disabled:opacity-40 disabled:cursor-not-allowed"
         >
           <SparklesIcon className="h-5 w-5" />
-          Guardar
+          Save
         </button>
       </div>
 
