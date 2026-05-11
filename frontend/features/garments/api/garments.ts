@@ -31,3 +31,13 @@ export const uploadGarment = async (file: File, userId: number): Promise<Garment
   const { data } = await api.post<Garment>('/api/garments/', formData);
   return data;
 };
+
+export const searchGarments = async (q: string, userId: number, limit = 12): Promise<Garment[]> => {
+  const { data } = await api.get<Garment[]>('/api/garments/search', { params: { q, user_id: userId, limit } });
+  return data;
+};
+
+export const getSimilarGarments = async (garmentId: number, userId: number, limit = 6): Promise<Garment[]> => {
+  const { data } = await api.get<Garment[]>(`/api/garments/${garmentId}/similar`, { params: { user_id: userId, limit } });
+  return data;
+};
